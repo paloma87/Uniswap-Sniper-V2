@@ -12,31 +12,27 @@ import {
   Percent,
 } from '@uniswap/sdk';
 import { ethers } from 'ethers';
+import config from '../config.json';
 export const Greeter = (name: string) => `Hello ${name}`;
 
-const walletAddress: string = '0x31F42841c2db5173425b5223809CF3A38FEde360';
-const uniswapV2Router: string = '0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D';
-const chainID: ChainId = ChainId.ROPSTEN;
-const provider = new ethers.providers.JsonRpcProvider('https://ropsten.infura.io/v3/9e4b802d4ef5426ca365eca832be2466');
-const swaprouterABi = [
-  'function getAmountsOut(uint amountIn, address[] memory path) public view returns (uint[] memory amounts)',
-  'function swapExactTokensForTokens(uint amountIn, uint amountOutMin, address[] calldata path, address to, uint deadline) external returns (uint[] memory amounts)',
-  'function swapExactETHForTokens(uint amountOutMin, address[] calldata path, address to, uint deadline) external payable returns (uint[] memory amounts)',
-];
-const gasLimit = 150000;
+const chainID: ChainId  =ChainId[config.chainID as keyof typeof ChainId];
+
+const provider = new ethers.providers.JsonRpcProvider(config.providerUrl);
+
 
 async function SwapETHForToken(inputAmount: CurrencyAmount, path: string[]) {
-  //** Data nella quale la transazione viene rifiutata per timeout UNIX Timestamp */
+
+  /** Timestamp unix nella quale la transazione viene rigettata */
   const deadline = Math.floor(Date.now() / 1000) + 60 * 20; // 20 minutes
 
   const wallet = getSigner();
 
-  const swapContract = new ethers.Contract(uniswapV2Router, swaprouterABi, wallet);
+  const swapContract = new ethers.Contract(config.uniswapV2Router, config.swaprouterABi, wallet);
 
   const gasPrice = await provider.getGasPrice();
 
-  const tx = await swapContract.swapExactETHForTokens(inputAmount.raw, path, walletAddress, deadline, {
-    gasLimit: gasLimit,
+  const tx = await swapContract.swapExactETHForTokens(inputAmount.raw, path, config.walletAddress, deadline, {
+    gasLimit: config.gasLimit,
     gasPrice: gasPrice,
     value: inputAmount.raw.toString(),
   });
@@ -58,20 +54,21 @@ async function Snipe(TokenAdressToSnipe: string, amountInETH: string) {
   const route = new Route([coppiaDiToken], WETH[tokenToSnipe.chainId]);
   /** Calocla la qta di ether */
   const amountIn = ethers.utils.parseUnits(amountInETH, 'ether');
-  //** Calcolo il trade */
+  /** Calcolo il trade */
   const trade = new Trade(
     route,
     new TokenAmount(WETH[tokenToSnipe.chainId], amountIn.toBigInt()),
-    TradeType.EXACT_INPUT
+    TradeType.EXACT_INPUT,
   );
   /** Calcola lo slippage per il  prezzo di uscita del tokensnipe */
   const slippageTolerancehigh = new Percent('20', '100'); // 20.0%
 
   /** Calcolo il minumo di tokensniper che sono disposto a ricevere  considerato lo slippage */
   const amountOut = trade.minimumAmountOut(slippageTolerancehigh); // needs to be converted to e.g. hex
-  //** Path di trasferimento  */
+  /** Path di trasferimento  */
   const path = [WETH[tokenToSnipe.chainId].address, tokenToSnipe.address];
 
+  /** Lancia e attende lo swap */
   const tokenAmountOut = await SwapETHForToken(trade.inputAmount, path);
 
   return tokenAmountOut;
@@ -94,5 +91,10 @@ export function SnipeToken(tokenAdressToSnipe: string, amountInETH: string, time
 
 function main() {
   // Test di uno snipe
-  Snipe('0x31F42841c2db5173425b5223809CF3A38FEde360', '0.01');
+ // Snipe('0x31F42841c2db5173425b5223809CF3A38FEde360', '0.01');
+
+ console.log("log");
+
 }
+
+main();
