@@ -15,13 +15,11 @@ import { ethers } from 'ethers';
 import config from '../config.json';
 export const Greeter = (name: string) => `Hello ${name}`;
 
-const chainID: ChainId  =ChainId[config.chainID as keyof typeof ChainId];
+const chainID: ChainId = ChainId[config.chainID as keyof typeof ChainId];
 
 const provider = new ethers.providers.JsonRpcProvider(config.providerUrl);
 
-
 async function SwapETHForToken(inputAmount: CurrencyAmount, path: string[]) {
-
   /** Timestamp unix nella quale la transazione viene rigettata */
   const deadline = Math.floor(Date.now() / 1000) + 60 * 20; // 20 minutes
 
@@ -91,10 +89,9 @@ export function SnipeToken(tokenAdressToSnipe: string, amountInETH: string, time
 
 function main() {
   // Test di uno snipe
- // Snipe('0x31F42841c2db5173425b5223809CF3A38FEde360', '0.01');
+  // Snipe('0x31F42841c2db5173425b5223809CF3A38FEde360', '0.01');
 
- console.log("log");
-
+  console.log('log');
 }
 
 main();
