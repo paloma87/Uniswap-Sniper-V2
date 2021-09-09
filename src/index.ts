@@ -11,7 +11,7 @@ import {
   TradeType,
   Percent,
 } from '@uniswap/sdk';
-import { ethers } from 'ethers';
+import { BigNumber, ethers } from 'ethers';
 import config from '../config.json';
 import genericErc20Abi from '../erc20Abi.json';
 export const Greeter = (name: string) => `Hello ${name}`;
@@ -25,7 +25,63 @@ async function GetGasPrice(): Promise<ethers.BigNumber> {
   else return await provider.getGasPrice();
 }
 
-async function SwapETHForToken(amountIn: CurrencyAmount, amountOutMin: CurrencyAmount, path: string[]) {
+/**
+ * la funzione approva la spesa da uniswap del token sul proprio wallet
+ * @param tokenAdressToSnipe token da approvare
+ */
+async function approveTokenUniswap(tokenAdressToSnipe: string) {
+  const wallet = getSigner();
+  const contract = new ethers.Contract(tokenAdressToSnipe, genericErc20Abi, wallet);
+  await contract.approve(config.uniswapV2Router, String(ethers.constants.MaxInt256));
+}
+
+async function swapExactTokensForETH(
+  amountIn: CurrencyAmount,
+  amountOutMin: CurrencyAmount,
+  path: string[],
+): ethers.BigNumber {
+  /** Timestamp unix nella quale la transazione viene rigettata */
+  const deadline = Math.floor(Date.now() / 1000) + 60 * 20; // 20 minutes
+
+  const wallet = getSigner();
+
+  const swapContract = new ethers.Contract(config.uniswapV2Router, config.swaprouterABi, wallet);
+
+  const gasPrice = await GetGasPrice();
+
+  const tx = await swapContract.swapExactTokensForETH(
+    amountOutMin.raw.toString(),
+    path,
+    config.walletAddress,
+    deadline,
+    {
+      gasLimit: config.gasLimit,
+      gasPrice: gasPrice,
+      value: amountIn.raw.toString(),
+    },
+  );
+
+  console.log(tx);
+  console.log('https://ropsten.etherscan.io/tx/' + tx.hash);
+  const result = await tx.wait();
+  console.log(result);
+  if (result.confirmations == 1 && result.status == 1) {
+    console.log('Transaction Mined');
+    /** Recupera il bilancio del token comprato */
+    const balance = await balanceOf(path[1]);
+    console.log('Il bilancio del token sul wallet è: ' + ethers.utils.formatUnits(String(balance), '18'));
+    return balance;
+  } else {
+    console.log('Qualcosa è andato storto');
+  }
+  return ethers.constants.Zero;
+}
+
+async function swapETHForToken(
+  amountIn: CurrencyAmount,
+  amountOutMin: CurrencyAmount,
+  path: string[],
+): ethers.BigNumber {
   /** Timestamp unix nella quale la transazione viene rigettata */
   const deadline = Math.floor(Date.now() / 1000) + 60 * 20; // 20 minutes
 
@@ -47,9 +103,6 @@ async function SwapETHForToken(amountIn: CurrencyAmount, amountOutMin: CurrencyA
     },
   );
 
-
-
-  
   console.log(tx);
   console.log('https://ropsten.etherscan.io/tx/' + tx.hash);
   const result = await tx.wait();
@@ -59,12 +112,14 @@ async function SwapETHForToken(amountIn: CurrencyAmount, amountOutMin: CurrencyA
     /** Recupera il bilancio del token comprato */
     const balance = await balanceOf(path[1]);
     console.log('Il bilancio del token sul wallet è: ' + ethers.utils.formatUnits(String(balance), '18'));
+    return balance;
   } else {
     console.log('Qualcosa è andato storto');
   }
+  return ethers.constants.Zero;
 }
 
-async function balanceOf(tokenAdress: string) {
+async function balanceOf(tokenAdress: string): Promise<BigNumber> {
   const contract = new ethers.Contract(tokenAdress, genericErc20Abi, provider);
   const balance = (await contract.balanceOf(config.walletAddress)).toString();
   return balance;
@@ -85,7 +140,7 @@ async function isTransactionMined(transactionHash: string) {
   }
 }
 
-async function Snipe(TokenAdressToSnipe: string, amountInETH: string) {
+async function snipe(TokenAdressToSnipe: string, amountInETH: string): ethers.BigNumber {
   const tokenToSnipe: Token = await Fetcher.fetchTokenData(chainID, TokenAdressToSnipe, provider);
   const coppiaDiToken: Pair = await Fetcher.fetchPairData(tokenToSnipe, WETH[tokenToSnipe.chainId], provider);
   /** Definisce la rotta del trading  ovvero da ETH verso tokenToSnipe */
@@ -107,9 +162,35 @@ async function Snipe(TokenAdressToSnipe: string, amountInETH: string) {
   const path = [WETH[tokenToSnipe.chainId].address, tokenToSnipe.address];
 
   /** Lancia e attende lo swap */
-  const tokenAmountOut = await SwapETHForToken(trade.inputAmount, amountOut, path);
+  const tokenAmountOut = await swapETHForToken(trade.inputAmount, amountOut, path);
 
   return tokenAmountOut;
+}
+
+/** QUESTA E DA FINIRE E FARE I TEST */
+async function makeMoney(TokenAdressToSell: string, amountToken: ethers.BigNumber): Promise<string> {
+  const tokenToSnipe: Token = await Fetcher.fetchTokenData(chainID, TokenAdressToSell, provider);
+  const coppiaDiToken: Pair = await Fetcher.fetchPairData(tokenToSnipe, WETH[tokenToSnipe.chainId], provider);
+  /** Definisce la rotta del trading  ovvero da ETH verso tokenToSnipe */
+  const route = new Route([coppiaDiToken], WETH[tokenToSnipe.chainId]);
+  /** Calcolo il trade */
+  const trade = new Trade(
+    route,
+    new TokenAmount(WETH[tokenToSnipe.chainId], amountToken.toBigInt()),
+    TradeType.EXACT_INPUT,
+  );
+
+  const slippageToleranceLow = new Percent('5', '1000'); // 0.5%
+
+  /** Calcolo il minumo di tokensniper che sono disposto a ricevere  considerato lo slippage */
+  const amountOut = trade.minimumAmountOut(slippageToleranceLow); // needs to be converted to e.g. hex
+
+  const path = [tokenToSnipe.address, WETH[tokenToSnipe.chainId].address];
+
+  /** Lancia e attende lo swap */
+  const tokenAmountOut = await swapExactTokensForETH(trade.inputAmount, amountOut, path);
+
+  return tokenAmountOut.toString();
 }
 
 /**
@@ -127,9 +208,15 @@ export function SnipeToken(tokenAdressToSnipe: string, amountInETH: string, time
   return 232;
 }
 
-function main() {
+async function main() {
+  //Quesat puo girare in parallelo serve per la vendita
+  approveTokenUniswap('0x31F42841c2db5173425b5223809CF3A38FEde360');
+
   // Test di uno snipe
-  Snipe('0x31F42841c2db5173425b5223809CF3A38FEde360', '0.01');
+  const amountOut = await snipe('0x31F42841c2db5173425b5223809CF3A38FEde360', '0.01');
+
+  //Questa vende il token
+  const amountETH = await makeMoney('0x31F42841c2db5173425b5223809CF3A38FEde360', amountOut);
 
   console.log('log');
 }
