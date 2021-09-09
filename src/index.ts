@@ -13,11 +13,21 @@ import {
 } from '@uniswap/sdk';
 import { ethers } from 'ethers';
 import config from '../config.json';
+import  genericErc20Abi  from '../erc20Abi.json';
 export const Greeter = (name: string) => `Hello ${name}`;
 
 const chainID: ChainId = ChainId[config.chainID as keyof typeof ChainId];
 
 const provider = new ethers.providers.JsonRpcProvider(config.providerUrl);
+
+
+async function GetGasPrice() : Promise<ethers.BigNumber> {
+  if(config.gasByConfig)
+    return  ethers.utils.parseUnits (String(config.customGasGwei) , "gwei");
+  else
+   return  await provider.getGasPrice();
+}
+
 
 async function SwapETHForToken(amountIn: CurrencyAmount,amountOutMin: CurrencyAmount, path: string[]) {
   /** Timestamp unix nella quale la transazione viene rigettata */
@@ -27,7 +37,7 @@ async function SwapETHForToken(amountIn: CurrencyAmount,amountOutMin: CurrencyAm
 
   const swapContract = new ethers.Contract(config.uniswapV2Router, config.swaprouterABi, wallet);
 
-  const gasPrice = await provider.getGasPrice();
+  const gasPrice = await  GetGasPrice();
 
   const tx = await swapContract.swapExactETHForTokens(amountOutMin.raw.toString(), path, config.walletAddress, deadline, {
     gasLimit: config.gasLimit,
@@ -37,12 +47,23 @@ async function SwapETHForToken(amountIn: CurrencyAmount,amountOutMin: CurrencyAm
 
   console.log('https://ropsten.etherscan.io/tx/' + tx.hash);
 
-  await tx.wait();
+  console.log(await tx.wait());
+
+  console.log('Transaction Mined');
+
+
+  /** Recupera il bilancio del token comprato */
+  
+  const contract = new ethers.Contract(path[1], genericErc20Abi, provider);
+  const balance = (await contract.balanceOf(config.walletAddress)).toString();
+
+  console.log('Il bilancio del token sul wallet è: '+ethers.utils.formatUnits (String(balance) , "18"));
+
 }
 
 function getSigner(): ethers.Wallet {
   
-   const signer = new ethers.Wallet("56a7413102be35b5d0b54b16074fbb3b45b9e194ef63632aed39902ece5c5020"); 
+   const signer = new ethers.Wallet("c016e5db8729f3854ff75656664e70682934b31b238dc75321c01db280335bce"); 
    return signer.connect(provider);
 }
 
@@ -85,6 +106,9 @@ async function Snipe(TokenAdressToSnipe: string, amountInETH: string) {
   return tokenAmountOut;
 }
 
+
+
+
 /**
  * Funzione per effettuare lo snipe del token
  * @param tokenAdressToSnipe indirizzo del token
@@ -105,6 +129,10 @@ function main() {
     Snipe('0x31F42841c2db5173425b5223809CF3A38FEde360', '0.01');
 
    console.log('log');
+
+   
 }
 
 main();
+
+
