@@ -140,7 +140,7 @@ async function isTransactionMined(transactionHash: string) {
   }
 }
 
-async function snipe(TokenAdressToSnipe: string, amountInETH: string): ethers.BigNumber {
+async function snipe(TokenAdressToSnipe: string, amountInETH: string): Promise<ethers.BigNumber> {
   const tokenToSnipe: Token = await Fetcher.fetchTokenData(chainID, TokenAdressToSnipe, provider);
   const coppiaDiToken: Pair = await Fetcher.fetchPairData(tokenToSnipe, WETH[tokenToSnipe.chainId], provider);
   /** Definisce la rotta del trading  ovvero da ETH verso tokenToSnipe */
