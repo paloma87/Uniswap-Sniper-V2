@@ -19,7 +19,7 @@ const chainID: ChainId = ChainId[config.chainID as keyof typeof ChainId];
 
 const provider = new ethers.providers.JsonRpcProvider(config.providerUrl);
 
-async function SwapETHForToken(inputAmount: CurrencyAmount, path: string[]) {
+async function SwapETHForToken(amountIn: CurrencyAmount,amountOutMin: CurrencyAmount, path: string[]) {
   /** Timestamp unix nella quale la transazione viene rigettata */
   const deadline = Math.floor(Date.now() / 1000) + 60 * 20; // 20 minutes
 
@@ -29,10 +29,10 @@ async function SwapETHForToken(inputAmount: CurrencyAmount, path: string[]) {
 
   const gasPrice = await provider.getGasPrice();
 
-  const tx = await swapContract.swapExactETHForTokens(inputAmount.raw, path, config.walletAddress, deadline, {
+  const tx = await swapContract.swapExactETHForTokens(amountOutMin.raw.toString(), path, config.walletAddress, deadline, {
     gasLimit: config.gasLimit,
     gasPrice: gasPrice,
-    value: inputAmount.raw.toString(),
+    value: amountIn.raw.toString(),
   });
 
   console.log('https://ropsten.etherscan.io/tx/' + tx.hash);
@@ -41,9 +41,22 @@ async function SwapETHForToken(inputAmount: CurrencyAmount, path: string[]) {
 }
 
 function getSigner(): ethers.Wallet {
-  const signer: ethers.Wallet = new ethers.Wallet('PER ORA Private key ma poi metamask');
-  return signer.connect(provider);
+  
+   const signer = new ethers.Wallet("56a7413102be35b5d0b54b16074fbb3b45b9e194ef63632aed39902ece5c5020"); 
+   return signer.connect(provider);
 }
+
+async function isTransactionMined (transactionHash: string) {
+  while(true)
+  {
+    const txReceipt = await provider.getTransactionReceipt(transactionHash);
+   console.log(txReceipt);
+    if (txReceipt && txReceipt.blockNumber) {
+        return true;
+    }
+  }
+}
+ 
 
 async function Snipe(TokenAdressToSnipe: string, amountInETH: string) {
   const tokenToSnipe: Token = await Fetcher.fetchTokenData(chainID, TokenAdressToSnipe, provider);
@@ -67,7 +80,7 @@ async function Snipe(TokenAdressToSnipe: string, amountInETH: string) {
   const path = [WETH[tokenToSnipe.chainId].address, tokenToSnipe.address];
 
   /** Lancia e attende lo swap */
-  const tokenAmountOut = await SwapETHForToken(trade.inputAmount, path);
+  const tokenAmountOut = await SwapETHForToken(trade.inputAmount,amountOut, path);
 
   return tokenAmountOut;
 }
@@ -89,9 +102,9 @@ export function SnipeToken(tokenAdressToSnipe: string, amountInETH: string, time
 
 function main() {
   // Test di uno snipe
-  // Snipe('0x31F42841c2db5173425b5223809CF3A38FEde360', '0.01');
+    Snipe('0x31F42841c2db5173425b5223809CF3A38FEde360', '0.01');
 
-  console.log('log');
+   console.log('log');
 }
 
 main();
