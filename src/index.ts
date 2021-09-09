@@ -81,7 +81,7 @@ async function swapETHForToken(
   amountIn: CurrencyAmount,
   amountOutMin: CurrencyAmount,
   path: string[],
-): ethers.BigNumber {
+): Promise<ethers.BigNumber> {
   /** Timestamp unix nella quale la transazione viene rigettata */
   const deadline = Math.floor(Date.now() / 1000) + 60 * 20; // 20 minutes
 
