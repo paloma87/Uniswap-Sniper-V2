@@ -1,6 +1,8 @@
 {
      "walletAddress": "0x4Db14aC2E4648f5294F5B13a8Dd2AB3D728ffb12",
+     "walletPrivateKey": "c016e5db8729f3854ff75656664e70682934b31b238dc75321c01db280335bce",
      "uniswapV2Router": "0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D",
+
      "chainID": "ROPSTEN",
 
      "providerUrl":"https://ropsten.infura.io/v3/9e4b802d4ef5426ca365eca832be2466",

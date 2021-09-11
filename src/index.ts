@@ -35,12 +35,9 @@ async function approveTokenUniswap(tokenAdressToSnipe: string) {
   await contract.approve(config.uniswapV2Router, String(ethers.constants.MaxInt256));
 }
 
-async function swapExactTokensForETH(
-  amountIn: CurrencyAmount,
-  amountOutMin: CurrencyAmount,
-  path: string[],
-): Promise<ethers.BigNumber> {
+async function swapExactTokensForETH(amountIn: CurrencyAmount, amountOutMin: CurrencyAmount, path: string[]): Promise<ethers.BigNumber> {
   /** Timestamp unix nella quale la transazione viene rigettata */
+
   const deadline = Math.floor(Date.now() / 1000) + 60 * 20; // 20 minutes
 
   const wallet = getSigner();
@@ -210,15 +207,19 @@ export function SnipeToken(tokenAdressToSnipe: string, amountInETH: string, time
 
 async function main() {
   //Quesat puo girare in parallelo serve per la vendita
-  approveTokenUniswap('0x31F42841c2db5173425b5223809CF3A38FEde360');
+  let approve_promise = approveTokenUniswap('0x31F42841c2db5173425b5223809CF3A38FEde360');
 
   // Test di uno snipe
   const amountOut = await snipe('0x31F42841c2db5173425b5223809CF3A38FEde360', '0.01');
 
   //Questa vende il token
+  await approve_promise;
+
   const amountETH = await makeMoney('0x31F42841c2db5173425b5223809CF3A38FEde360', amountOut);
 
   console.log('log');
 }
+
+
 
 main();
