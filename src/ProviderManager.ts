@@ -20,9 +20,6 @@ export class ProviderManager {
     private chainID: ChainId = ChainId[config.chainID as keyof typeof ChainId];
     private provider: any;
 
-    /**
-     *
-     */
     constructor() {
         this.provider = new ethers.providers.JsonRpcProvider(config.providerUrl);
     }
@@ -33,8 +30,7 @@ export class ProviderManager {
         return contract.approve(config.uniswapV2Router, String(ethers.constants.MaxInt256));
     }
 
-    /** QUESTA E DA FINIRE E FARE I TEST */
-    public async MakeMoney(TokenAdressToSell: string, amountToken: ethers.BigNumber): Promise<string> {
+     public async MakeMoney(TokenAdressToSell: string, amountToken: ethers.BigNumber): Promise<string> {
         const tokenToSnipe: Token = await Fetcher.fetchTokenData(this.chainID, TokenAdressToSell, this.provider);
         const coppiaDiToken: Pair = await Fetcher.fetchPairData(tokenToSnipe, WETH[tokenToSnipe.chainId], this.provider);
         /** Definisce la rotta del trading  ovvero da ETH verso tokenToSnipe */
@@ -88,7 +84,7 @@ export class ProviderManager {
 
     private async BalanceOf(tokenAdress: string): Promise<BigNumber> {
         const contract = new ethers.Contract(tokenAdress, genericErc20Abi, this.provider);
-        const balance = (await contract.balanceOf(config.walletAddress)).toString();
+        const balance : BigNumber= (await contract.balanceOf(config.walletAddress));
         return balance;
     }
 
@@ -128,11 +124,10 @@ export class ProviderManager {
             },
         );
 
-        console.log(tx);
         console.log('https://ropsten.etherscan.io/tx/' + tx.hash);
         const result = await tx.wait();
         console.log(result);
-        if (result.confirmations == 1 && result.status == 1) {
+        if (result.status == 1) {
             console.log('Transaction Mined');
             /** Recupera il bilancio del token comprato */
             const balance = await this.BalanceOf(path[1]);
@@ -143,8 +138,6 @@ export class ProviderManager {
         }
         return ethers.constants.Zero;
     }
-
-
 
     private async swapExactTokensForETH(amountIn: CurrencyAmount, amountOutMin: CurrencyAmount, path: string[]): Promise<ethers.BigNumber> {
         /** Timestamp unix nella quale la transazione viene rigettata */
@@ -157,15 +150,21 @@ export class ProviderManager {
 
         const gasPrice = await this.GetGasPrice();
 
+
+;
+        console.log(amountIn)
+        console.log(amountOutMin)
+
+
         const tx = await swapContract.swapExactTokensForETH(
+            amountIn.raw.toString(),
             amountOutMin.raw.toString(),
             path,
             config.walletAddress,
             deadline,
             {
                 gasLimit: config.gasLimit,
-                gasPrice: gasPrice,
-                value: amountIn.raw.toString(),
+                gasPrice: gasPrice
             },
         );
 
