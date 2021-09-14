@@ -14,13 +14,16 @@ import {
   Percent,
 } from '@uniswap/sdk';
 import genericErc20Abi from '../erc20Abi.json';
+import { ILogger } from './BotLogger';
 
-export class ProviderManager {
+export class TradeManager {
   private chainID: ChainId = ChainId[config.chainID as keyof typeof ChainId];
   private provider: any;
+  private logger?: ILogger;
 
-  constructor() {
+  constructor(logger?: ILogger) {
     this.provider = new ethers.providers.JsonRpcProvider(config.providerUrl);
+    this.logger = logger;
   }
 
   public async ApproveTokenUniswap(tokenAdressToSnipe: string) {
@@ -32,6 +35,7 @@ export class ProviderManager {
   public async MakeMoney(TokenAdressToSell: string, amountToken: ethers.BigNumber): Promise<ethers.BigNumber> {
     const tokenToSnipe: Token = await Fetcher.fetchTokenData(this.chainID, TokenAdressToSell, this.provider);
     const coppiaDiToken: Pair = await Fetcher.fetchPairData(tokenToSnipe, WETH[tokenToSnipe.chainId], this.provider);
+    this.logger?.LogDebug('Dati per lo swap  DI VENDITArecuperati');
     /** Definisce la rotta del trading  ovvero da ETH verso tokenToSnipe */
     const route = new Route([coppiaDiToken], WETH[tokenToSnipe.chainId]);
     /** Calcolo il trade */
@@ -45,17 +49,22 @@ export class ProviderManager {
 
     /** Calcolo il minumo di tokensniper che sono disposto a ricevere  considerato lo slippage */
     const amountOut = trade.minimumAmountOut(slippageToleranceLow); // needs to be converted to e.g. hex
+    this.logger?.LogInfo('Execution price:' + trade.executionPrice);
+    this.logger?.LogInfo(
+      'ETH quantity min whit slippage :' +
+        ethers.utils.formatUnits(BigNumber.from(amountOut.quotient), WETH[tokenToSnipe.chainId].decimals),
+    );
 
     const path = [tokenToSnipe.address, WETH[tokenToSnipe.chainId].address];
 
     /** Lancia e attende lo swap */
-    const tokenAmountOut = await this.swapExactTokensForETH(trade.inputAmount, amountOut, path);
+    const tokenAmountOut = await this.SwapExactTokensForETH(trade.inputAmount, amountOut, path);
 
     return tokenAmountOut;
   }
 
-  public async Snipe(TokenAdressToSnipe: string, amountInETH: string): Promise<ethers.BigNumber> {
-    const tokenToSnipe: Token = await Fetcher.fetchTokenData(this.chainID, TokenAdressToSnipe, this.provider);
+  public async Snipe(tokenAdressToSnipe: string, amountInETH: string): Promise<ethers.BigNumber> {
+    const tokenToSnipe: Token = await Fetcher.fetchTokenData(this.chainID, tokenAdressToSnipe, this.provider);
     const coppiaDiToken: Pair = await Fetcher.fetchPairData(tokenToSnipe, WETH[tokenToSnipe.chainId], this.provider);
     /** Definisce la rotta del trading  ovvero da ETH verso tokenToSnipe */
     const route = new Route([coppiaDiToken], WETH[tokenToSnipe.chainId]);
@@ -72,6 +81,12 @@ export class ProviderManager {
 
     /** Calcolo il minumo di tokensniper che sono disposto a ricevere  considerato lo slippage */
     const amountOut = trade.minimumAmountOut(slippageTolerancehigh); // needs to be converted to e.g. hex
+    this.logger?.LogInfo('Execution snipe price:' + trade.executionPrice);
+    this.logger?.LogInfo(
+      'Token snipe quantity min whit slippage :' +
+        ethers.utils.formatUnits(BigNumber.from(amountOut.quotient), tokenToSnipe.decimals),
+    );
+
     /** Path di trasferimento  */
     const path = [WETH[tokenToSnipe.chainId].address, tokenToSnipe.address];
 
@@ -97,7 +112,11 @@ export class ProviderManager {
     return signer.connect(this.provider);
   }
 
-  private async SwapETHForToken( amountIn: CurrencyAmount, amountOutMin: CurrencyAmount,path: string[], ): Promise<ethers.BigNumber> {
+  private async SwapETHForToken(
+    amountIn: CurrencyAmount,
+    amountOutMin: CurrencyAmount,
+    path: string[],
+  ): Promise<ethers.BigNumber> {
     /** Timestamp unix nella quale la transazione viene rigettata */
     const deadline = Math.floor(Date.now() / 1000) + 60 * 20; // 20 minutes
 
@@ -118,22 +137,17 @@ export class ProviderManager {
         value: amountIn.raw.toString(),
       },
     );
-
-    console.log('https://ropsten.etherscan.io/tx/' + tx.hash);
-    const result = await tx.wait();
-    if (result.status ===1) {
-      console.log('BUY Transaction Mined');
-      /** Recupera il bilancio del token comprato */
-      const balance = await this.BalanceOf(path[1]);
-      console.log('balance of sniped token : ' + ethers.utils.formatUnits(String(balance), '18'));
-      return balance;
-    } else {
-      console.log('Qualcosa è andato storto');
-    }
-    return ethers.constants.Zero;
+    await this.WaitTransactionComplete(tx);
+    const Balnce: BigNumber = await this.BalanceOf(path[1]);
+    this.logger?.LogInfo('balance of sniped token ' + +ethers.utils.formatUnits(String(Balnce), '18'));
+    return Balnce;
   }
 
-  private async swapExactTokensForETH(amountIn: CurrencyAmount,amountOutMin: CurrencyAmount, path: string[] ): Promise<ethers.BigNumber> {
+  private async SwapExactTokensForETH(
+    amountIn: CurrencyAmount,
+    amountOutMin: CurrencyAmount,
+    path: string[],
+  ): Promise<ethers.BigNumber> {
     /** Timestamp unix nella quale la transazione viene rigettata */
 
     const deadline = Math.floor(Date.now() / 1000) + 60 * 20; // 20 minutes
@@ -156,17 +170,20 @@ export class ProviderManager {
       },
     );
 
-    console.log('https://ropsten.etherscan.io/tx/' + tx.hash);
+    await this.WaitTransactionComplete(tx);
+    const Balnce: BigNumber = await this.BalanceOf(path[1]);
+    this.logger?.LogInfo('balance of sniped token ' + +ethers.utils.formatUnits(String(Balnce), '18'));
+    return Balnce;
+  }
+
+  async WaitTransactionComplete(tx: any) {
+    this.logger?.LogInfo('Transaction pending');
+    this.logger?.LogInfo(config.EtherScanTransactio + tx.hash);
     const result = await tx.wait();
     if (result.status === 1) {
-      console.log('SELL Transaction Mined');
-      /** Recupera il bilancio del token comprato */
-      const balance = await this.BalanceOf(path[1]);
-      console.log('balance of sniped token : ' + ethers.utils.formatUnits(String(balance), '18'));
-      return balance;
+      this.logger?.LogInfo('Transaction confirmed');
     } else {
-      console.log('Qualcosa è andato storto');
+      throw Error('Transaction Error:' + tx);
     }
-    return ethers.constants.Zero;
   }
 }
