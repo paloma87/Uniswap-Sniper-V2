@@ -1,5 +1,4 @@
 import { BigNumber, ethers } from 'ethers';
-import config from '../config.json';
 import {
   ChainId,
   Token,
@@ -15,25 +14,30 @@ import {
 } from '@uniswap/sdk';
 import genericErc20Abi from '../erc20Abi.json';
 import { ILogger } from './BotLogger';
+import { TradeParams } from './TradeParams';
+import { BotConfiguration } from './BotConfiguration';
 
 export class TradeManager {
-  private chainID: ChainId = ChainId[config.chainID as keyof typeof ChainId];
+  
   private provider: any;
   private logger?: ILogger;
-
-  constructor(logger?: ILogger) {
-    this.provider = new ethers.providers.JsonRpcProvider(config.providerUrl);
+  private tradeParams:TradeParams;
+  private botConfig: BotConfiguration;
+  constructor(tradeParams: TradeParams,botConfig: BotConfiguration,logger?: ILogger) {
+    this.provider = new ethers.providers.JsonRpcProvider(botConfig.providerUrl);
     this.logger = logger;
+    this.tradeParams = tradeParams;
+    this.botConfig= botConfig;
   }
 
   public async ApproveTokenUniswap(tokenAdressToSnipe: string) {
     const wallet = this.GetSigner();
     const contract = new ethers.Contract(tokenAdressToSnipe, genericErc20Abi, wallet);
-    return contract.approve(config.uniswapV2Router, String(ethers.constants.MaxInt256));
+    return contract.approve(this.botConfig.uniswapV2Router, String(ethers.constants.MaxInt256));
   }
 
   public async MakeMoney(TokenAdressToSell: string, amountToken: ethers.BigNumber): Promise<ethers.BigNumber> {
-    const tokenToSnipe: Token = await Fetcher.fetchTokenData(this.chainID, TokenAdressToSell, this.provider);
+    const tokenToSnipe: Token = await Fetcher.fetchTokenData(this.botConfig.chainID, TokenAdressToSell, this.provider);
     const coppiaDiToken: Pair = await Fetcher.fetchPairData(tokenToSnipe, WETH[tokenToSnipe.chainId], this.provider);
     this.logger?.LogDebug('Dati per lo swap  DI VENDITArecuperati');
     /** Definisce la rotta del trading  ovvero da ETH verso tokenToSnipe */
@@ -64,7 +68,7 @@ export class TradeManager {
   }
 
   public async Snipe(tokenAdressToSnipe: string, amountInETH: string): Promise<ethers.BigNumber> {
-    const tokenToSnipe: Token = await Fetcher.fetchTokenData(this.chainID, tokenAdressToSnipe, this.provider);
+    const tokenToSnipe: Token = await Fetcher.fetchTokenData(this.botConfig.chainID, tokenAdressToSnipe, this.provider);
     const coppiaDiToken: Pair = await Fetcher.fetchPairData(tokenToSnipe, WETH[tokenToSnipe.chainId], this.provider);
     /** Definisce la rotta del trading  ovvero da ETH verso tokenToSnipe */
     const route = new Route([coppiaDiToken], WETH[tokenToSnipe.chainId]);
@@ -98,17 +102,21 @@ export class TradeManager {
 
   private async BalanceOf(tokenAdress: string): Promise<BigNumber> {
     const contract = new ethers.Contract(tokenAdress, genericErc20Abi, this.provider);
-    const balance: BigNumber = await contract.balanceOf(config.walletAddress);
+    const balance: BigNumber = await contract.balanceOf(this.botConfig.walletAddress);
     return balance;
   }
 
-  private async GetGasPrice(): Promise<ethers.BigNumber> {
-    if (config.gasByConfig) return ethers.utils.parseUnits(String(config.customGasGwei), 'gwei');
+  private async GetBuyGasPrice(): Promise<ethers.BigNumber> {
+    if (this.tradeParams.BuyCustomGas) return ethers.utils.parseUnits(String(this.tradeParams.BuyCustomGasWei), 'gwei');
     else return await this.provider.getGasPrice();
   }
 
+  private async GetSellGasPrice(): Promise<ethers.BigNumber> {
+    if (this.tradeParams.SellCustomGas) return ethers.utils.parseUnits(String(this.tradeParams.SellCustomGasWei), 'gwei');
+    else return await this.provider.getGasPrice();
+  }
   private GetSigner(): ethers.Wallet {
-    const signer = new ethers.Wallet(config.walletPrivateKey);
+    const signer = new ethers.Wallet(this.botConfig.walletPrivateKey);
     return signer.connect(this.provider);
   }
 
@@ -122,17 +130,17 @@ export class TradeManager {
 
     const wallet = this.GetSigner();
 
-    const swapContract = new ethers.Contract(config.uniswapV2Router, config.swaprouterABi, wallet);
+    const swapContract = new ethers.Contract(this.botConfig.uniswapV2Router, BotConfiguration.swaprouterABi, wallet);
 
-    const gasPrice = await this.GetGasPrice();
+    const gasPrice = await this.GetBuyGasPrice();
 
     const tx = await swapContract.swapExactETHForTokens(
       amountOutMin.raw.toString(),
       path,
-      config.walletAddress,
+      this.botConfig.walletAddress,
       deadline,
       {
-        gasLimit: config.gasLimit,
+        gasLimit: this.tradeParams.BuyGasLimit,
         gasPrice: gasPrice,
         value: amountIn.raw.toString(),
       },
@@ -154,18 +162,18 @@ export class TradeManager {
 
     const wallet = this.GetSigner();
 
-    const swapContract = new ethers.Contract(config.uniswapV2Router, config.swaprouterABi, wallet);
+    const swapContract = new ethers.Contract(this.botConfig.uniswapV2Router, BotConfiguration.swaprouterABi, wallet);
 
-    const gasPrice = await this.GetGasPrice();
+    const gasPrice = await this.GetSellGasPrice();
 
     const tx = await swapContract.swapExactTokensForETH(
       amountIn.raw.toString(),
       amountOutMin.raw.toString(),
       path,
-      config.walletAddress,
+      this.botConfig.walletAddress,
       deadline,
       {
-        gasLimit: config.gasLimit,
+        gasLimit: this.tradeParams.SellGasLimit,
         gasPrice: gasPrice,
       },
     );
@@ -178,7 +186,7 @@ export class TradeManager {
 
   async WaitTransactionComplete(tx: any) {
     this.logger?.LogInfo('Transaction pending');
-    this.logger?.LogInfo(config.EtherScanTransactio + tx.hash);
+    this.logger?.LogInfo(this.botConfig.EtherScanTransactio + tx.hash);
     const result = await tx.wait();
     if (result.status === 1) {
       this.logger?.LogInfo('Transaction confirmed');
