@@ -49,7 +49,7 @@ export class TradeManager {
       TradeType.EXACT_INPUT,
     );
 
-    const slippageToleranceLow = new Percent('5', '1000'); // 0.5%
+    const slippageToleranceLow = new Percent(this.tradeParams.SellSlippage, '100'); 
 
     /** Calcolo il minumo di tokensniper che sono disposto a ricevere  considerato lo slippage */
     const amountOut = trade.minimumAmountOut(slippageToleranceLow); // needs to be converted to e.g. hex
@@ -81,7 +81,7 @@ export class TradeManager {
       TradeType.EXACT_INPUT,
     );
     /** Calcola lo slippage per il  prezzo di uscita del tokensnipe */
-    const slippageTolerancehigh = new Percent('20', '100'); // 20.0%
+    const slippageTolerancehigh = new Percent(this.tradeParams.BuySlippage, '100'); 
 
     /** Calcolo il minumo di tokensniper che sono disposto a ricevere  considerato lo slippage */
     const amountOut = trade.minimumAmountOut(slippageTolerancehigh); // needs to be converted to e.g. hex
@@ -141,7 +141,7 @@ export class TradeManager {
       deadline,
       {
         gasLimit: this.tradeParams.BuyGasLimit,
-        gasPrice: gasPrice,
+        gasPrice,
         value: amountIn.raw.toString(),
       },
     );

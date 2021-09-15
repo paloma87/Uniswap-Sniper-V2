@@ -8,7 +8,7 @@
     "build": "tsc",
     "format": "prettier --write \"src/**/*.ts\" ",
     "lint": "tslint -p tsconfig.json",
-    "debug": "npx ts-node src/bot.ts"
+    "debug": "npx ts-node src/index.ts"
   },
   "repository": {
     "type": "git",

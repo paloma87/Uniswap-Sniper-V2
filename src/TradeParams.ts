@@ -4,6 +4,7 @@
 export class TradeParams {
  
  
+  /** The token to Snipe */
   public TokenToSnipe: string ="";
  
   /** Use Custom Gas to snipe if false the gas is calculate automatic using provider API */
@@ -12,7 +13,8 @@ export class TradeParams {
   public BuyCustomGasWei: string = '';
   /**  Gas limit for Snipe Transaction */
   public BuyGasLimit: number = 0; 
-  
+  /** Slippage percente for snipe  token (integer betwen 1 and 100) */
+  public BuySlippage:string ='12';
 
   /** Time to Sell in ms */
   public TimeToSellMs: number = 0; 
@@ -24,6 +26,8 @@ export class TradeParams {
   /** Custom Gas Price in Wei */
   public SellCustomGasWei: string = '';
   /**  Gas limit for Sell Transaction */
-  public SellGasLimit: number = 0; 
+  public SellGasLimit: number = 0;
+  /** Slippage  percent for sell transaction (integer betwen 1 and 100) */
+  public SellSlippage: string ='1'; 
  
 }

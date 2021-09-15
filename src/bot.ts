@@ -19,9 +19,9 @@ export class SniperBot
   }
 
  /**
-  * 
+  * Snipe a Token
   * @param tradeParams 
-  * @returns 
+  * @returns Eth value gain in wei units
   */
  async  SnipeToken(tradeParams:TradeParams): Promise<BigNumber>
  {
@@ -85,13 +85,3 @@ export class SniperBot
   }
 
 }
-// function main() {
-//   Promise.resolve(SnipeToken('0x31F42841c2db5173425b5223809CF3A38FEde360', '0.01', 2000, new ConsoleLogger())).then(
-//     (num) => {
-//       console.log(ethers.utils.formatUnits(String(num), '18'));
-//     },
-//   );
-// }
-
-// main();
-// {{token_addr}}@{{amount_in}}@{{gas_price}}@{{gas_limit}}@{{sleepage}}@{{time_to_sell}}
