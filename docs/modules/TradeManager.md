@@ -1,9 +1,9 @@
-[uniswap-sniper-v2](../README.md) / [Exports](../modules.md) / TradeManager
+[uniswap-sniper-v2](../README.md) / [Modules](../modules.md) / tradeManager
 
-# Module: TradeManager
+# Module: tradeManager
 
 ## Table of contents
 
 ### Classes
 
-- [TradeManager](../classes/TradeManager.TradeManager-1.md)
+- [TradeManager](../classes/tradeManager.TradeManager.md)

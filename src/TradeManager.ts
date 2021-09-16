@@ -13,10 +13,13 @@ import {
   Percent,
 } from '@uniswap/sdk';
 import genericErc20Abi from '../erc20Abi.json';
-import { ILogger } from './BotLogger';
-import { TradeParams } from './TradeParams';
-import { BotConfiguration } from './BotConfiguration';
+import { ILogger } from './botLogger';
+import { TradeParams } from './tradeParams';
+import { BotConfiguration } from './botConfiguration';
 
+/**
+ * Handle the trade operation 
+ */
 export class TradeManager {
   
   private provider: any;
@@ -30,12 +33,24 @@ export class TradeManager {
     this.botConfig= botConfig;
   }
 
+  /**
+   * Call a token smart contract to approve uniswap to use the sniped token
+   * This operation is preparatory to the sale of the sniped token
+   * @param tokenAdressToSnipe 
+   * @returns 
+   */
   public async ApproveTokenUniswap(tokenAdressToSnipe: string) {
     const wallet = this.GetSigner();
     const contract = new ethers.Contract(tokenAdressToSnipe, genericErc20Abi, wallet);
     return contract.approve(this.botConfig.uniswapV2Router, String(ethers.constants.MaxInt256));
   }
-
+/**
+ * Use uniswap Sdk to calculate the parameter operation 
+ * for the trade of sale sniped token and call operation
+ * @param TokenAdressToSell 
+ * @param amountToken 
+ * @returns 
+ */
   public async MakeMoney(TokenAdressToSell: string, amountToken: ethers.BigNumber): Promise<ethers.BigNumber> {
     const tokenToSnipe: Token = await Fetcher.fetchTokenData(this.botConfig.chainID, TokenAdressToSell, this.provider);
     const coppiaDiToken: Pair = await Fetcher.fetchPairData(tokenToSnipe, WETH[tokenToSnipe.chainId], this.provider);
@@ -66,7 +81,13 @@ export class TradeManager {
 
     return tokenAmountOut;
   }
-
+  /*
+   * Use uniswap Sdk to calculate the parameter operation 
+   * for the trade of buy sniped token and call operation
+   * @param tokenAdressToSnipe 
+   * @param amountInETH 
+   * @returns 
+   */
   public async Snipe(tokenAdressToSnipe: string, amountInETH: string): Promise<ethers.BigNumber> {
     const tokenToSnipe: Token = await Fetcher.fetchTokenData(this.botConfig.chainID, tokenAdressToSnipe, this.provider);
     const coppiaDiToken: Pair = await Fetcher.fetchPairData(tokenToSnipe, WETH[tokenToSnipe.chainId], this.provider);
@@ -100,26 +121,50 @@ export class TradeManager {
     return tokenAmountOut;
   }
 
+  /**
+   * Retrive the current balance of token into wallet configured
+   * @param tokenAdress Token
+   * @returns 
+   */
   private async BalanceOf(tokenAdress: string): Promise<BigNumber> {
     const contract = new ethers.Contract(tokenAdress, genericErc20Abi, this.provider);
     const balance: BigNumber = await contract.balanceOf(this.botConfig.walletAddress);
     return balance;
   }
 
+  /**
+   * Return gaas_price for snipe trade
+   * @returns Gas price in wei 
+   */
   private async GetBuyGasPrice(): Promise<ethers.BigNumber> {
     if (this.tradeParams.BuyCustomGas) return ethers.utils.parseUnits(String(this.tradeParams.BuyCustomGasWei), 'gwei');
     else return await this.provider.getGasPrice();
   }
 
+  /**
+   * Return gas_price for sell trade
+   * @returns Gas price in wei
+   */
   private async GetSellGasPrice(): Promise<ethers.BigNumber> {
     if (this.tradeParams.SellCustomGas) return ethers.utils.parseUnits(String(this.tradeParams.SellCustomGasWei), 'gwei');
     else return await this.provider.getGasPrice();
   }
+  /**
+   * Retrive the signer for transaction
+   * @returns Signer connected to provider
+   */
   private GetSigner(): ethers.Wallet {
     const signer = new ethers.Wallet(this.botConfig.walletPrivateKey);
     return signer.connect(this.provider);
   }
 
+  /**
+   * Execute the snipe operation
+   * @param amountIn ethers in input
+   * @param amountOutMin amount minium out accepted for the trade
+   * @param path adress route token
+   * @returns 
+   */
   private async SwapETHForToken(
     amountIn: CurrencyAmount,
     amountOutMin: CurrencyAmount,
@@ -151,6 +196,13 @@ export class TradeManager {
     return Balnce;
   }
 
+  /**
+   * Execute the sell trade 
+   * @param amountIn sniped token amount 
+   * @param amountOutMin ether amount minium accepted for the trade
+   * @param path 
+   * @returns 
+   */
   private async SwapExactTokensForETH(
     amountIn: CurrencyAmount,
     amountOutMin: CurrencyAmount,
@@ -174,7 +226,7 @@ export class TradeManager {
       deadline,
       {
         gasLimit: this.tradeParams.SellGasLimit,
-        gasPrice: gasPrice,
+        gasPrice,
       },
     );
 
@@ -184,9 +236,13 @@ export class TradeManager {
     return Balnce;
   }
 
-  async WaitTransactionComplete(tx: any) {
+  /**
+   * Wait transaction and check if status ok else throw an exception
+   * @param tx Transaction pending
+   */ 
+  async WaitTransactionComplete(tx: any)  {
     this.logger?.LogInfo('Transaction pending');
-    this.logger?.LogInfo(this.botConfig.EtherScanTransactio + tx.hash);
+    this.logger?.LogInfo(this.botConfig.etherScanTransactio + tx.hash);
     const result = await tx.wait();
     if (result.status === 1) {
       this.logger?.LogInfo('Transaction confirmed');

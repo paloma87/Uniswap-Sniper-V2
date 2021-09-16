@@ -1,15 +1,17 @@
 import { BigNumber } from '@ethersproject/bignumber';
 import { ethers } from 'ethers';
-import { BotConfiguration } from './BotConfiguration';
-import { ConsoleLogger, ILogger } from './BotLogger';
-import { TradeManager } from './TradeManager';
-import { TradeParams } from './TradeParams';
+import { BotConfiguration } from './botConfiguration';
+import { ConsoleLogger, ILogger } from './botLogger';
+import { TradeManager } from './tradeManager';
+import { TradeParams } from './tradeParams';
 
-
+/**
+ * Class for handling lifecycle of bot 
+ */
 export class SniperBot
 { 
 
-  /** Configuration */
+  /** Configuration of bot */
   private botConfig: BotConfiguration;
   private logger?: ILogger;
   constructor(botConfig: BotConfiguration,logger?: ILogger)
@@ -80,6 +82,12 @@ export class SniperBot
     return amountOut;
   }
 
+  /**
+   * Calculete the gein in ether
+   * @param amountInETH 
+   * @param amountOutETH 
+   * @returns 
+   */
   private CalculateGain(amountInETH: BigNumber, amountOutETH: BigNumber): BigNumber {
     return amountOutETH.sub(amountInETH);
   }

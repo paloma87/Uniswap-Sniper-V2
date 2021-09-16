@@ -1,9 +1,9 @@
-[uniswap-sniper-v2](../README.md) / [Exports](../modules.md) / TradeParams
+[uniswap-sniper-v2](../README.md) / [Modules](../modules.md) / tradeParams
 
-# Module: TradeParams
+# Module: tradeParams
 
 ## Table of contents
 
 ### Classes
 
-- [TradeParams](../classes/TradeParams.TradeParams-1.md)
+- [TradeParams](../classes/tradeParams.TradeParams.md)

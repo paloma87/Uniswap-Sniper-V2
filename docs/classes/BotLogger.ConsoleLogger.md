@@ -1,31 +1,31 @@
-[uniswap-sniper-v2](../README.md) / [Exports](../modules.md) / [BotLogger](../modules/BotLogger.md) / ConsoleLogger
+[uniswap-sniper-v2](../README.md) / [Modules](../modules.md) / [botLogger](../modules/botLogger.md) / ConsoleLogger
 
 # Class: ConsoleLogger
 
-[BotLogger](../modules/BotLogger.md).ConsoleLogger
+[botLogger](../modules/botLogger.md).ConsoleLogger
 
 ## Implements
 
-- [`ILogger`](../interfaces/BotLogger.ILogger.md)
+- [`ILogger`](../interfaces/botLogger.ILogger.md)
 
 ## Table of contents
 
 ### Constructors
 
-- [constructor](BotLogger.ConsoleLogger.md#constructor)
+- [constructor](botLogger.ConsoleLogger.md#constructor)
 
 ### Properties
 
-- [error](BotLogger.ConsoleLogger.md#error)
-- [logDebug](BotLogger.ConsoleLogger.md#logdebug)
-- [logInfo](BotLogger.ConsoleLogger.md#loginfo)
+- [error](botLogger.ConsoleLogger.md#error)
+- [logDebug](botLogger.ConsoleLogger.md#logdebug)
+- [logInfo](botLogger.ConsoleLogger.md#loginfo)
 
 ### Methods
 
-- [LogDebug](BotLogger.ConsoleLogger.md#logdebug)
-- [LogError](BotLogger.ConsoleLogger.md#logerror)
-- [LogInfo](BotLogger.ConsoleLogger.md#loginfo)
-- [ParseData](BotLogger.ConsoleLogger.md#parsedata)
+- [LogDebug](botLogger.ConsoleLogger.md#logdebug)
+- [LogError](botLogger.ConsoleLogger.md#logerror)
+- [LogInfo](botLogger.ConsoleLogger.md#loginfo)
+- [ParseData](botLogger.ConsoleLogger.md#parsedata)
 
 ## Constructors
 
@@ -41,7 +41,7 @@
 
 #### Defined in
 
-[BotLogger.ts:12](https://github.com/paloma87/Uniswap-Sniper-V2/blob/92bb6b1/src/BotLogger.ts#L12)
+botLogger.ts:12
 
 ___
 
@@ -51,7 +51,7 @@ ___
 
 #### Defined in
 
-[BotLogger.ts:11](https://github.com/paloma87/Uniswap-Sniper-V2/blob/92bb6b1/src/BotLogger.ts#L11)
+botLogger.ts:11
 
 ___
 
@@ -61,7 +61,7 @@ ___
 
 #### Defined in
 
-[BotLogger.ts:10](https://github.com/paloma87/Uniswap-Sniper-V2/blob/92bb6b1/src/BotLogger.ts#L10)
+botLogger.ts:10
 
 ## Methods
 
@@ -81,11 +81,11 @@ ___
 
 #### Implementation of
 
-[ILogger](../interfaces/BotLogger.ILogger.md).[LogDebug](../interfaces/BotLogger.ILogger.md#logdebug)
+[ILogger](../interfaces/botLogger.ILogger.md).[LogDebug](../interfaces/botLogger.ILogger.md#logdebug)
 
 #### Defined in
 
-[BotLogger.ts:19](https://github.com/paloma87/Uniswap-Sniper-V2/blob/92bb6b1/src/BotLogger.ts#L19)
+botLogger.ts:19
 
 ___
 
@@ -105,11 +105,11 @@ ___
 
 #### Implementation of
 
-[ILogger](../interfaces/BotLogger.ILogger.md).[LogError](../interfaces/BotLogger.ILogger.md#logerror)
+[ILogger](../interfaces/botLogger.ILogger.md).[LogError](../interfaces/botLogger.ILogger.md#logerror)
 
 #### Defined in
 
-[BotLogger.ts:24](https://github.com/paloma87/Uniswap-Sniper-V2/blob/92bb6b1/src/BotLogger.ts#L24)
+botLogger.ts:24
 
 ___
 
@@ -129,11 +129,11 @@ ___
 
 #### Implementation of
 
-[ILogger](../interfaces/BotLogger.ILogger.md).[LogInfo](../interfaces/BotLogger.ILogger.md#loginfo)
+[ILogger](../interfaces/botLogger.ILogger.md).[LogInfo](../interfaces/botLogger.ILogger.md#loginfo)
 
 #### Defined in
 
-[BotLogger.ts:14](https://github.com/paloma87/Uniswap-Sniper-V2/blob/92bb6b1/src/BotLogger.ts#L14)
+botLogger.ts:14
 
 ___
 
@@ -153,4 +153,4 @@ ___
 
 #### Defined in
 
-[BotLogger.ts:29](https://github.com/paloma87/Uniswap-Sniper-V2/blob/92bb6b1/src/BotLogger.ts#L29)
+botLogger.ts:29

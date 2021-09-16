@@ -1,13 +1,13 @@
-[uniswap-sniper-v2](../README.md) / [Exports](../modules.md) / BotLogger
+[uniswap-sniper-v2](../README.md) / [Modules](../modules.md) / botLogger
 
-# Module: BotLogger
+# Module: botLogger
 
 ## Table of contents
 
 ### Classes
 
-- [ConsoleLogger](../classes/BotLogger.ConsoleLogger.md)
+- [ConsoleLogger](../classes/botLogger.ConsoleLogger.md)
 
 ### Interfaces
 
-- [ILogger](../interfaces/BotLogger.ILogger.md)
+- [ILogger](../interfaces/botLogger.ILogger.md)

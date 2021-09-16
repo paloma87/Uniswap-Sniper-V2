@@ -20,7 +20,7 @@ export class BotConfiguration {
   public providerUrl: string = '';
 
   /** Etheruem Trasaction Scanner Url (use for Log Only) */
-  public EtherScanTransactio: string = 'https://ropsten.etherscan.io/tx/';
+  public etherScanTransactio: string = 'https://ropsten.etherscan.io/tx/';
 
 
   public static swaprouterABi: string[] =[ 'function getAmountsOut(uint amountIn, address[] memory path) public view returns (uint[] memory amounts)',

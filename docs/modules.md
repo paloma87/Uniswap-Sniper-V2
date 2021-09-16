@@ -1,4 +1,4 @@
-[uniswap-sniper-v2](README.md) / Exports
+[uniswap-sniper-v2](README.md) / Modules
 
 # uniswap-sniper-v2
 
@@ -6,8 +6,8 @@
 
 ### Modules
 
-- [BotConfiguration](modules/BotConfiguration.md)
-- [BotLogger](modules/BotLogger.md)
-- [TradeManager](modules/TradeManager.md)
-- [TradeParams](modules/TradeParams.md)
-- [bot](modules/bot.md)
+- [botConfiguration](modules/botConfiguration.md)
+- [botLogger](modules/botLogger.md)
+- [sniperBot](modules/sniperBot.md)
+- [tradeManager](modules/tradeManager.md)
+- [tradeParams](modules/tradeParams.md)

@@ -1,9 +1,9 @@
 import { ChainId } from "@uniswap/sdk";
 import { ethers } from "ethers";
-import { SniperBot } from "./bot";
-import { BotConfiguration } from "./BotConfiguration";
-import { ConsoleLogger } from "./BotLogger";
-import { TradeParams } from "./TradeParams";
+import { SniperBot } from "./sniperBot";
+import { BotConfiguration } from "./botConfiguration";
+import { ConsoleLogger } from "./botLogger";
+import { TradeParams } from "./tradeParams";
 
 
 
@@ -16,7 +16,7 @@ function main()
     botConfig.providerUrl='https://ropsten.infura.io/v3/9e4b802d4ef5426ca365eca832be2466';
     botConfig.walletPrivateKey='c016e5db8729f3854ff75656664e70682934b31b238dc75321c01db280335bce';
     botConfig.chainID=ChainId.ROPSTEN;
-    botConfig.EtherScanTransactio='https://ropsten.etherscan.io/tx/';
+    botConfig.etherScanTransactio='https://ropsten.etherscan.io/tx/';
 
 
     const bot = new SniperBot(botConfig,new ConsoleLogger());
