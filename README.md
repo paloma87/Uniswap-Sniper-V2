@@ -1,4 +1,4 @@
-uniswap-sniper-v2 / [Module](docs/modules.md)
+uniswap-sniper-v2 / [Code Documentation](docs/modules.md)
 
 # Uniswap-Sniper-V2
 
