@@ -9,7 +9,7 @@
             "request": "launch",
             "name": "Launch Bot",
             "skipFiles": ["<node_internals>/**"],
-            "program": "${workspaceFolder}/lib/src/bot.js",
+            "program": "${workspaceFolder}/lib/src/index.js",
             "sourceMaps": true
         },
         {

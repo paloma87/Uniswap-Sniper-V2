@@ -7,7 +7,7 @@ export interface ILogger {
 }
 
 export class ConsoleLogger implements ILogger {
-  public logInfo: boolean = false;
+  public logInfo: boolean = true;
   public logDebug: boolean = true;
   public error: boolean = true;
 

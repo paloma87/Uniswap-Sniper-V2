@@ -39,7 +39,7 @@ Class for handling lifecycle of bot
 
 #### Defined in
 
-sniperBot.ts:23
+[sniperBot.ts:17](https://github.com/paloma87/Uniswap-Sniper-V2/blob/dbb3c0e/src/sniperBot.ts#L17)
 
 ## Properties
 
@@ -51,7 +51,7 @@ Configuration of bot
 
 #### Defined in
 
-sniperBot.ts:21
+[sniperBot.ts:15](https://github.com/paloma87/Uniswap-Sniper-V2/blob/dbb3c0e/src/sniperBot.ts#L15)
 
 ___
 
@@ -61,7 +61,7 @@ ___
 
 #### Defined in
 
-sniperBot.ts:22
+[sniperBot.ts:16](https://github.com/paloma87/Uniswap-Sniper-V2/blob/dbb3c0e/src/sniperBot.ts#L16)
 
 ## Methods
 
@@ -84,7 +84,7 @@ Calculete the gein in ether
 
 #### Defined in
 
-sniperBot.ts:97
+[sniperBot.ts:91](https://github.com/paloma87/Uniswap-Sniper-V2/blob/dbb3c0e/src/sniperBot.ts#L91)
 
 ___
 
@@ -108,7 +108,7 @@ ___
 
 #### Defined in
 
-sniperBot.ts:58
+[sniperBot.ts:52](https://github.com/paloma87/Uniswap-Sniper-V2/blob/dbb3c0e/src/sniperBot.ts#L52)
 
 ___
 
@@ -131,7 +131,7 @@ ___
 
 #### Defined in
 
-sniperBot.ts:77
+[sniperBot.ts:71](https://github.com/paloma87/Uniswap-Sniper-V2/blob/dbb3c0e/src/sniperBot.ts#L71)
 
 ___
 
@@ -155,4 +155,4 @@ Eth value gain in wei units
 
 #### Defined in
 
-sniperBot.ts:34
+[sniperBot.ts:28](https://github.com/paloma87/Uniswap-Sniper-V2/blob/dbb3c0e/src/sniperBot.ts#L28)

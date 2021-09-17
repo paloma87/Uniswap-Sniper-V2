@@ -6,44 +6,50 @@ import { TradeManager } from './tradeManager';
 import { TradeParams } from './tradeParams';
 
 /**
- * Class for handling lifecycle of bot 
+ * Class for handling lifecycle of bot
  */
-export class SniperBot
-{ 
-
+export class SniperBot {
   /** Configuration of bot */
   private botConfig: BotConfiguration;
   private logger?: ILogger;
-  constructor(botConfig: BotConfiguration,logger?: ILogger)
-  {
+  constructor(botConfig: BotConfiguration, logger?: ILogger) {
     this.botConfig = botConfig;
     this.logger = logger;
   }
 
- /**
-  * Snipe a Token
-  * @param tradeParams 
-  * @returns Eth value gain in wei units
-  */
- async  SnipeToken(tradeParams:TradeParams): Promise<BigNumber>
- {
+  /**
+   * Snipe a Token
+   * @param tradeParams
+   * @returns Eth value gain in wei units
+   */
+  async SnipeToken(tradeParams: TradeParams): Promise<BigNumber> {
     let calculatedGain: BigNumber = BigNumber.from(0);
-    let amountOutETH: BigNumber = BigNumber.from(0);
-    try
-    {
-      this.logger?.LogInfo('Sniping Token: Inizialed' + tradeParams.TokenToSnipe+ ' ethers: ' + tradeParams.AmountInETH);
+    try {
+      this.logger?.LogInfo(
+        'Sniping Token: Inizialed ' + tradeParams.TokenToSnipe + ' ethers: ' + tradeParams.AmountInETH,
+      );
 
-      const provider = new TradeManager(tradeParams,this.botConfig,this.logger);
+      const provider = new TradeManager(tradeParams, this.botConfig, this.logger);
 
-      const amountOut: BigNumber = await this.Snipe(provider, tradeParams.TokenToSnipe, this.logger, tradeParams.AmountInETH);
+      const amountOut: BigNumber = await this.Snipe(
+        provider,
+        tradeParams.TokenToSnipe,
+        this.logger,
+        tradeParams.AmountInETH,
+      );
 
-      amountOutETH = await this.Sell(this.logger, tradeParams.TimeToSellMs, tradeParams.TokenToSnipe, amountOut, provider);
+      const amountOutETH: BigNumber = await this.Sell(
+        this.logger,
+        tradeParams.TimeToSellMs,
+        tradeParams.TokenToSnipe,
+        amountOut,
+        provider,
+      );
 
       calculatedGain = this.CalculateGain(ethers.utils.parseEther(tradeParams.AmountInETH), amountOutETH);
 
-      this.logger?.LogInfo('Operation complete gain:' + ethers.utils.formatEther(calculatedGain).toString());
-    }
-    catch (Error: any) {
+      this.logger?.LogInfo('Operation complete gain: ' + ethers.utils.formatEther(calculatedGain).toString());
+    } catch (Error: any) {
       this.logger?.LogError(Error);
     }
     return calculatedGain;
@@ -58,13 +64,18 @@ export class SniperBot
   ) {
     let amountOutETH: BigNumber = BigNumber.from(0);
     logger?.LogInfo('Waiting Selling Time(ms):' + timeBeforeSell);
-    setTimeout(async () => {
-      logger?.LogInfo(
-        'Selling Token: started' + tokenAdressToSnipe + ' amount: ' + ethers.utils.formatUnits(amountIn, '18'),
-      );
-      amountOutETH = await provider.MakeMoney(tokenAdressToSnipe, amountIn);
-    }, timeBeforeSell);
-    logger?.LogInfo('Selling Token end:' + tokenAdressToSnipe + ' ethers: ' + amountOutETH);
+    await new Promise((resolve) =>
+      setTimeout(async () => {
+        logger?.LogInfo('Selling Token: started' + tokenAdressToSnipe + ' amount: ' + ethers.utils.formatEther(amountIn));
+        amountOutETH = await provider.MakeMoney(tokenAdressToSnipe, amountIn);
+        logger?.LogInfo(
+          'Selling Token end:' + tokenAdressToSnipe + ' ethers: ' + ethers.utils.formatEther(amountOutETH)
+        );
+
+        return 0;
+      }, timeBeforeSell),
+    ); // 3 sec
+
     return amountOutETH;
   }
 
@@ -84,12 +95,11 @@ export class SniperBot
 
   /**
    * Calculete the gein in ether
-   * @param amountInETH 
-   * @param amountOutETH 
-   * @returns 
+   * @param amountInETH
+   * @param amountOutETH
+   * @returns
    */
   private CalculateGain(amountInETH: BigNumber, amountOutETH: BigNumber): BigNumber {
     return amountOutETH.sub(amountInETH);
   }
-
 }
