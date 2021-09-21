@@ -23,6 +23,7 @@ function main() {
   trade.BuyCustomGasWei = '15.00';
   trade.BuyGasLimit = 150000;
   trade.BuySlippage = '15';
+  trade.EnableSell= false;
   trade.TimeToSellMs = 2000;
   trade.SellCustomGas = true;
   trade.SellCustomGasWei = '10.00';

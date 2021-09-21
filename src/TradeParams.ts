@@ -14,6 +14,9 @@ export class TradeParams {
   /** Slippage percente for snipe  token (integer betwen 1 and 100) */
   public BuySlippage: string = '12';
 
+  /** Enable Sell After Snipe */
+  public EnableSell: boolean = false;
+  
   /** Time to Sell in ms */
   public TimeToSellMs: number = 0;
   /** Amount of ether for trade sniping */

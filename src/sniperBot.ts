@@ -38,16 +38,17 @@ export class SniperBot {
         tradeParams.AmountInETH,
       );
 
-      const amountOutETH: BigNumber = await this.Sell(
-        this.logger,
-        tradeParams.TimeToSellMs,
-        tradeParams.TokenToSnipe,
-        amountOut,
-        provider,
-      );
+      if(tradeParams.EnableSell) {
+            const amountOutETH: BigNumber = await this.Sell(
+            this.logger,
+            tradeParams.TimeToSellMs,
+            tradeParams.TokenToSnipe,
+            amountOut,
+            provider,
+          );
 
-      calculatedGain = this.CalculateGain(ethers.utils.parseEther(tradeParams.AmountInETH), amountOutETH);
-
+          calculatedGain = this.CalculateGain(ethers.utils.parseEther(tradeParams.AmountInETH), amountOutETH);
+        }
       this.logger?.LogInfo('Operation complete gain: ' + ethers.utils.formatEther(calculatedGain).toString());
     } catch (Error: any) {
       this.logger?.LogError(Error);
