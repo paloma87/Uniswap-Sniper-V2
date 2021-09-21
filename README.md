@@ -21,13 +21,13 @@ Questo bot è stato pensato per uno swap da ETH--> TOKEN_SNIPED aspettare un tem
 
 ### Usage
 La prima cosa da fare è istanziare l'oggetto  ```BotConfiguration``` incapsula la configurazione generale del bot  come ad esempio il provider,il network eterum ,il wallet di appoggio ecc.
-* Vedi la relativa Docs  [BotConfiguration](docs/classes/botConfiguration.BotConfiguration-1.md)
+* Vedi la relativa Docs  [BotConfiguration](docs/classes/BotConfiguration.BotConfiguration-1.md)
 
 Istanziare la classe ```SniperBot``` (è possibile passare una classe che implementa l'interfaccia ILogger di default è stato implementaoto un log su console).
 Adesso il bot è pronto per l'uso!!
 
 Per avviare l'operazione costruire l'oggetto ```TradeParams```  impostare i dati necessari e chiamare il metodo ```SnipeToken.(TradeParams)```  del bot.
-* Vedi la relativa Docs  [TradeParams](docs/classes/tradeParams.TradeParams-1.md)
+* Vedi la relativa Docs  [TradeParams](docs/classes/TradeParams.TradeParams-1.md)
 
 #### TypeScript or ES6
 ```typescript
