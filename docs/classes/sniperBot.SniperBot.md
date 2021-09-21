@@ -39,7 +39,7 @@ Class for handling lifecycle of bot
 
 #### Defined in
 
-[sniperBot.ts:15](https://github.com/paloma87/Uniswap-Sniper-V2/blob/1bdca46/src/sniperBot.ts#L15)
+[sniperBot.ts:15](https://github.com/paloma87/Uniswap-Sniper-V2/blob/bdfc316/src/sniperBot.ts#L15)
 
 ## Properties
 
@@ -51,7 +51,7 @@ Configuration of bot
 
 #### Defined in
 
-[sniperBot.ts:13](https://github.com/paloma87/Uniswap-Sniper-V2/blob/1bdca46/src/sniperBot.ts#L13)
+[sniperBot.ts:13](https://github.com/paloma87/Uniswap-Sniper-V2/blob/bdfc316/src/sniperBot.ts#L13)
 
 ___
 
@@ -61,7 +61,7 @@ ___
 
 #### Defined in
 
-[sniperBot.ts:14](https://github.com/paloma87/Uniswap-Sniper-V2/blob/1bdca46/src/sniperBot.ts#L14)
+[sniperBot.ts:14](https://github.com/paloma87/Uniswap-Sniper-V2/blob/bdfc316/src/sniperBot.ts#L14)
 
 ## Methods
 
@@ -84,7 +84,7 @@ Calculete the gein in ether
 
 #### Defined in
 
-[sniperBot.ts:103](https://github.com/paloma87/Uniswap-Sniper-V2/blob/1bdca46/src/sniperBot.ts#L103)
+[sniperBot.ts:103](https://github.com/paloma87/Uniswap-Sniper-V2/blob/bdfc316/src/sniperBot.ts#L103)
 
 ___
 
@@ -108,7 +108,7 @@ ___
 
 #### Defined in
 
-[sniperBot.ts:59](https://github.com/paloma87/Uniswap-Sniper-V2/blob/1bdca46/src/sniperBot.ts#L59)
+[sniperBot.ts:59](https://github.com/paloma87/Uniswap-Sniper-V2/blob/bdfc316/src/sniperBot.ts#L59)
 
 ___
 
@@ -131,7 +131,7 @@ ___
 
 #### Defined in
 
-[sniperBot.ts:83](https://github.com/paloma87/Uniswap-Sniper-V2/blob/1bdca46/src/sniperBot.ts#L83)
+[sniperBot.ts:83](https://github.com/paloma87/Uniswap-Sniper-V2/blob/bdfc316/src/sniperBot.ts#L83)
 
 ___
 
@@ -155,4 +155,4 @@ Eth value gain in wei units
 
 #### Defined in
 
-[sniperBot.ts:25](https://github.com/paloma87/Uniswap-Sniper-V2/blob/1bdca46/src/sniperBot.ts#L25)
+[sniperBot.ts:25](https://github.com/paloma87/Uniswap-Sniper-V2/blob/bdfc316/src/sniperBot.ts#L25)

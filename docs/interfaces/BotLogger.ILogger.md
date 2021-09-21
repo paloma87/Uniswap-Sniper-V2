@@ -34,7 +34,7 @@
 
 #### Defined in
 
-[BotLogger.ts:4](https://github.com/paloma87/Uniswap-Sniper-V2/blob/1bdca46/src/BotLogger.ts#L4)
+[BotLogger.ts:4](https://github.com/paloma87/Uniswap-Sniper-V2/blob/bdfc316/src/BotLogger.ts#L4)
 
 ___
 
@@ -54,7 +54,7 @@ ___
 
 #### Defined in
 
-[BotLogger.ts:6](https://github.com/paloma87/Uniswap-Sniper-V2/blob/1bdca46/src/BotLogger.ts#L6)
+[BotLogger.ts:6](https://github.com/paloma87/Uniswap-Sniper-V2/blob/bdfc316/src/BotLogger.ts#L6)
 
 ___
 
@@ -74,4 +74,4 @@ ___
 
 #### Defined in
 
-[BotLogger.ts:2](https://github.com/paloma87/Uniswap-Sniper-V2/blob/1bdca46/src/BotLogger.ts#L2)
+[BotLogger.ts:2](https://github.com/paloma87/Uniswap-Sniper-V2/blob/bdfc316/src/BotLogger.ts#L2)

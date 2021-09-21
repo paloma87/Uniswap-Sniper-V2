@@ -48,7 +48,7 @@ Handle the trade operation
 
 #### Defined in
 
-[TradeManager.ts:28](https://github.com/paloma87/Uniswap-Sniper-V2/blob/1bdca46/src/TradeManager.ts#L28)
+[TradeManager.ts:28](https://github.com/paloma87/Uniswap-Sniper-V2/blob/bdfc316/src/TradeManager.ts#L28)
 
 ## Properties
 
@@ -58,7 +58,7 @@ Handle the trade operation
 
 #### Defined in
 
-[TradeManager.ts:27](https://github.com/paloma87/Uniswap-Sniper-V2/blob/1bdca46/src/TradeManager.ts#L27)
+[TradeManager.ts:27](https://github.com/paloma87/Uniswap-Sniper-V2/blob/bdfc316/src/TradeManager.ts#L27)
 
 ___
 
@@ -68,7 +68,7 @@ ___
 
 #### Defined in
 
-[TradeManager.ts:25](https://github.com/paloma87/Uniswap-Sniper-V2/blob/1bdca46/src/TradeManager.ts#L25)
+[TradeManager.ts:25](https://github.com/paloma87/Uniswap-Sniper-V2/blob/bdfc316/src/TradeManager.ts#L25)
 
 ___
 
@@ -78,7 +78,7 @@ ___
 
 #### Defined in
 
-[TradeManager.ts:24](https://github.com/paloma87/Uniswap-Sniper-V2/blob/1bdca46/src/TradeManager.ts#L24)
+[TradeManager.ts:24](https://github.com/paloma87/Uniswap-Sniper-V2/blob/bdfc316/src/TradeManager.ts#L24)
 
 ___
 
@@ -88,7 +88,7 @@ ___
 
 #### Defined in
 
-[TradeManager.ts:26](https://github.com/paloma87/Uniswap-Sniper-V2/blob/1bdca46/src/TradeManager.ts#L26)
+[TradeManager.ts:26](https://github.com/paloma87/Uniswap-Sniper-V2/blob/bdfc316/src/TradeManager.ts#L26)
 
 ## Methods
 
@@ -111,7 +111,7 @@ This operation is preparatory to the sale of the sniped token
 
 #### Defined in
 
-[TradeManager.ts:41](https://github.com/paloma87/Uniswap-Sniper-V2/blob/1bdca46/src/TradeManager.ts#L41)
+[TradeManager.ts:41](https://github.com/paloma87/Uniswap-Sniper-V2/blob/bdfc316/src/TradeManager.ts#L41)
 
 ___
 
@@ -133,7 +133,7 @@ Retrive the current balance of token into wallet configured
 
 #### Defined in
 
-[TradeManager.ts:126](https://github.com/paloma87/Uniswap-Sniper-V2/blob/1bdca46/src/TradeManager.ts#L126)
+[TradeManager.ts:126](https://github.com/paloma87/Uniswap-Sniper-V2/blob/bdfc316/src/TradeManager.ts#L126)
 
 ___
 
@@ -151,7 +151,7 @@ Gas price in wei
 
 #### Defined in
 
-[TradeManager.ts:136](https://github.com/paloma87/Uniswap-Sniper-V2/blob/1bdca46/src/TradeManager.ts#L136)
+[TradeManager.ts:136](https://github.com/paloma87/Uniswap-Sniper-V2/blob/bdfc316/src/TradeManager.ts#L136)
 
 ___
 
@@ -169,7 +169,7 @@ Gas price in wei
 
 #### Defined in
 
-[TradeManager.ts:145](https://github.com/paloma87/Uniswap-Sniper-V2/blob/1bdca46/src/TradeManager.ts#L145)
+[TradeManager.ts:145](https://github.com/paloma87/Uniswap-Sniper-V2/blob/bdfc316/src/TradeManager.ts#L145)
 
 ___
 
@@ -187,7 +187,7 @@ Signer connected to provider
 
 #### Defined in
 
-[TradeManager.ts:154](https://github.com/paloma87/Uniswap-Sniper-V2/blob/1bdca46/src/TradeManager.ts#L154)
+[TradeManager.ts:154](https://github.com/paloma87/Uniswap-Sniper-V2/blob/bdfc316/src/TradeManager.ts#L154)
 
 ___
 
@@ -211,7 +211,7 @@ for the trade of sale sniped token and call operation
 
 #### Defined in
 
-[TradeManager.ts:53](https://github.com/paloma87/Uniswap-Sniper-V2/blob/1bdca46/src/TradeManager.ts#L53)
+[TradeManager.ts:53](https://github.com/paloma87/Uniswap-Sniper-V2/blob/bdfc316/src/TradeManager.ts#L53)
 
 ___
 
@@ -232,7 +232,7 @@ ___
 
 #### Defined in
 
-[TradeManager.ts:89](https://github.com/paloma87/Uniswap-Sniper-V2/blob/1bdca46/src/TradeManager.ts#L89)
+[TradeManager.ts:89](https://github.com/paloma87/Uniswap-Sniper-V2/blob/bdfc316/src/TradeManager.ts#L89)
 
 ___
 
@@ -256,7 +256,7 @@ Execute the snipe operation
 
 #### Defined in
 
-[TradeManager.ts:166](https://github.com/paloma87/Uniswap-Sniper-V2/blob/1bdca46/src/TradeManager.ts#L166)
+[TradeManager.ts:166](https://github.com/paloma87/Uniswap-Sniper-V2/blob/bdfc316/src/TradeManager.ts#L166)
 
 ___
 
@@ -280,7 +280,7 @@ Execute the sell trade
 
 #### Defined in
 
-[TradeManager.ts:204](https://github.com/paloma87/Uniswap-Sniper-V2/blob/1bdca46/src/TradeManager.ts#L204)
+[TradeManager.ts:204](https://github.com/paloma87/Uniswap-Sniper-V2/blob/bdfc316/src/TradeManager.ts#L204)
 
 ___
 
@@ -302,4 +302,4 @@ Wait transaction and check if status ok else throw an exception
 
 #### Defined in
 
-[TradeManager.ts:241](https://github.com/paloma87/Uniswap-Sniper-V2/blob/1bdca46/src/TradeManager.ts#L241)
+[TradeManager.ts:241](https://github.com/paloma87/Uniswap-Sniper-V2/blob/bdfc316/src/TradeManager.ts#L241)

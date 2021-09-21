@@ -38,7 +38,7 @@ Etherum Network
 
 #### Defined in
 
-[BotConfiguration.ts:17](https://github.com/paloma87/Uniswap-Sniper-V2/blob/1bdca46/src/BotConfiguration.ts#L17)
+[BotConfiguration.ts:17](https://github.com/paloma87/Uniswap-Sniper-V2/blob/bdfc316/src/BotConfiguration.ts#L17)
 
 ___
 
@@ -50,7 +50,7 @@ Etheruem Trasaction Scanner Url (use for Log Only)
 
 #### Defined in
 
-[BotConfiguration.ts:23](https://github.com/paloma87/Uniswap-Sniper-V2/blob/1bdca46/src/BotConfiguration.ts#L23)
+[BotConfiguration.ts:23](https://github.com/paloma87/Uniswap-Sniper-V2/blob/bdfc316/src/BotConfiguration.ts#L23)
 
 ___
 
@@ -62,7 +62,7 @@ Provide access of Blockchain Etherum(tested whit Infuria)
 
 #### Defined in
 
-[BotConfiguration.ts:20](https://github.com/paloma87/Uniswap-Sniper-V2/blob/1bdca46/src/BotConfiguration.ts#L20)
+[BotConfiguration.ts:20](https://github.com/paloma87/Uniswap-Sniper-V2/blob/bdfc316/src/BotConfiguration.ts#L20)
 
 ___
 
@@ -74,7 +74,7 @@ Ethereum Adresso of Router
 
 #### Defined in
 
-[BotConfiguration.ts:14](https://github.com/paloma87/Uniswap-Sniper-V2/blob/1bdca46/src/BotConfiguration.ts#L14)
+[BotConfiguration.ts:14](https://github.com/paloma87/Uniswap-Sniper-V2/blob/bdfc316/src/BotConfiguration.ts#L14)
 
 ___
 
@@ -86,7 +86,7 @@ Ethereum Adress of wallete
 
 #### Defined in
 
-[BotConfiguration.ts:8](https://github.com/paloma87/Uniswap-Sniper-V2/blob/1bdca46/src/BotConfiguration.ts#L8)
+[BotConfiguration.ts:8](https://github.com/paloma87/Uniswap-Sniper-V2/blob/bdfc316/src/BotConfiguration.ts#L8)
 
 ___
 
@@ -98,7 +98,7 @@ Wallet Private Key
 
 #### Defined in
 
-[BotConfiguration.ts:11](https://github.com/paloma87/Uniswap-Sniper-V2/blob/1bdca46/src/BotConfiguration.ts#L11)
+[BotConfiguration.ts:11](https://github.com/paloma87/Uniswap-Sniper-V2/blob/bdfc316/src/BotConfiguration.ts#L11)
 
 ___
 
@@ -108,4 +108,4 @@ ___
 
 #### Defined in
 
-[BotConfiguration.ts:25](https://github.com/paloma87/Uniswap-Sniper-V2/blob/1bdca46/src/BotConfiguration.ts#L25)
+[BotConfiguration.ts:25](https://github.com/paloma87/Uniswap-Sniper-V2/blob/bdfc316/src/BotConfiguration.ts#L25)
