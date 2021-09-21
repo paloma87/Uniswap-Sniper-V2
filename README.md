@@ -53,6 +53,7 @@ Per avviare l'operazione costruire l'oggetto ```TradeParams```  impostare i dati
     trade.BuyCustomGasWei="70.00";
     trade.BuyGasLimit=150000;
     trade.BuySlippage = '15';
+    trade.EnableSell= false;
     trade.TimeToSellMs = 10000;// 10 sec
     trade.SellCustomGas =true;
     trade.SellCustomGasWei='70.00';
