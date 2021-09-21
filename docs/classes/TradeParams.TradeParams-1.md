@@ -1,8 +1,8 @@
-[uniswap-sniper-v2](../README.md) / [Modules](../modules.md) / [tradeParams](../modules/tradeParams.md) / TradeParams
+[uniswap-sniper-v2](../README.md) / [Exports](../modules.md) / [TradeParams](../modules/TradeParams.md) / TradeParams
 
 # Class: TradeParams
 
-[tradeParams](../modules/tradeParams.md).TradeParams
+[TradeParams](../modules/TradeParams.md).TradeParams
 
 Trade Parameted For Execution
 
@@ -10,21 +10,22 @@ Trade Parameted For Execution
 
 ### Constructors
 
-- [constructor](tradeParams.TradeParams.md#constructor)
+- [constructor](TradeParams.TradeParams-1.md#constructor)
 
 ### Properties
 
-- [AmountInETH](tradeParams.TradeParams.md#amountineth)
-- [BuyCustomGas](tradeParams.TradeParams.md#buycustomgas)
-- [BuyCustomGasWei](tradeParams.TradeParams.md#buycustomgaswei)
-- [BuyGasLimit](tradeParams.TradeParams.md#buygaslimit)
-- [BuySlippage](tradeParams.TradeParams.md#buyslippage)
-- [SellCustomGas](tradeParams.TradeParams.md#sellcustomgas)
-- [SellCustomGasWei](tradeParams.TradeParams.md#sellcustomgaswei)
-- [SellGasLimit](tradeParams.TradeParams.md#sellgaslimit)
-- [SellSlippage](tradeParams.TradeParams.md#sellslippage)
-- [TimeToSellMs](tradeParams.TradeParams.md#timetosellms)
-- [TokenToSnipe](tradeParams.TradeParams.md#tokentosnipe)
+- [AmountInETH](TradeParams.TradeParams-1.md#amountineth)
+- [BuyCustomGas](TradeParams.TradeParams-1.md#buycustomgas)
+- [BuyCustomGasWei](TradeParams.TradeParams-1.md#buycustomgaswei)
+- [BuyGasLimit](TradeParams.TradeParams-1.md#buygaslimit)
+- [BuySlippage](TradeParams.TradeParams-1.md#buyslippage)
+- [EnableSell](TradeParams.TradeParams-1.md#enablesell)
+- [SellCustomGas](TradeParams.TradeParams-1.md#sellcustomgas)
+- [SellCustomGasWei](TradeParams.TradeParams-1.md#sellcustomgaswei)
+- [SellGasLimit](TradeParams.TradeParams-1.md#sellgaslimit)
+- [SellSlippage](TradeParams.TradeParams-1.md#sellslippage)
+- [TimeToSellMs](TradeParams.TradeParams-1.md#timetosellms)
+- [TokenToSnipe](TradeParams.TradeParams-1.md#tokentosnipe)
 
 ## Constructors
 
@@ -42,7 +43,7 @@ Amount of ether for trade sniping
 
 #### Defined in
 
-tradeParams.ts:22
+tradeParams.ts:23
 
 ___
 
@@ -54,7 +55,7 @@ Use Custom Gas to snipe if false the gas is calculate automatic using provider A
 
 #### Defined in
 
-tradeParams.ts:11
+tradeParams.ts:9
 
 ___
 
@@ -66,7 +67,7 @@ Custom Gas Price in Wei for snipe transaction
 
 #### Defined in
 
-tradeParams.ts:13
+tradeParams.ts:11
 
 ___
 
@@ -78,7 +79,7 @@ Gas limit for Snipe Transaction
 
 #### Defined in
 
-tradeParams.ts:15
+tradeParams.ts:13
 
 ___
 
@@ -90,7 +91,19 @@ Slippage percente for snipe  token (integer betwen 1 and 100)
 
 #### Defined in
 
-tradeParams.ts:17
+tradeParams.ts:15
+
+___
+
+### EnableSell
+
+• **EnableSell**: `boolean` = `false`
+
+Enable Sell After Snipe
+
+#### Defined in
+
+tradeParams.ts:18
 
 ___
 
@@ -102,7 +115,7 @@ Use Custom Gas to sell if false the gas is calculate automatic using provider AP
 
 #### Defined in
 
-tradeParams.ts:25
+tradeParams.ts:26
 
 ___
 
@@ -114,7 +127,7 @@ Custom Gas Price in Wei
 
 #### Defined in
 
-tradeParams.ts:27
+tradeParams.ts:28
 
 ___
 
@@ -126,7 +139,7 @@ Gas limit for Sell Transaction
 
 #### Defined in
 
-tradeParams.ts:29
+tradeParams.ts:30
 
 ___
 
@@ -138,7 +151,7 @@ Slippage  percent for sell transaction (integer betwen 1 and 100)
 
 #### Defined in
 
-tradeParams.ts:31
+tradeParams.ts:32
 
 ___
 
@@ -150,16 +163,16 @@ Time to Sell in ms
 
 #### Defined in
 
-tradeParams.ts:20
+tradeParams.ts:21
 
 ___
 
 ### TokenToSnipe
 
-• **TokenToSnipe**: `string` = `""`
+• **TokenToSnipe**: `string` = `''`
 
 The token to Snipe
 
 #### Defined in
 
-tradeParams.ts:8
+tradeParams.ts:6

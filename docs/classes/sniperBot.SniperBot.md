@@ -1,4 +1,4 @@
-[uniswap-sniper-v2](../README.md) / [Modules](../modules.md) / [sniperBot](../modules/sniperBot.md) / SniperBot
+[uniswap-sniper-v2](../README.md) / [Exports](../modules.md) / [sniperBot](../modules/sniperBot.md) / SniperBot
 
 # Class: SniperBot
 
@@ -34,34 +34,34 @@ Class for handling lifecycle of bot
 
 | Name | Type |
 | :------ | :------ |
-| `botConfig` | [`BotConfiguration`](botConfiguration.BotConfiguration.md) |
-| `logger?` | [`ILogger`](../interfaces/botLogger.ILogger.md) |
+| `botConfig` | [`BotConfiguration`](BotConfiguration.BotConfiguration-1.md) |
+| `logger?` | [`ILogger`](../interfaces/BotLogger.ILogger.md) |
 
 #### Defined in
 
-[sniperBot.ts:17](https://github.com/paloma87/Uniswap-Sniper-V2/blob/dbb3c0e/src/sniperBot.ts#L17)
+[sniperBot.ts:15](https://github.com/paloma87/Uniswap-Sniper-V2/blob/1bdca46/src/sniperBot.ts#L15)
 
 ## Properties
 
 ### botConfig
 
-• `Private` **botConfig**: [`BotConfiguration`](botConfiguration.BotConfiguration.md)
+• `Private` **botConfig**: [`BotConfiguration`](BotConfiguration.BotConfiguration-1.md)
 
 Configuration of bot
 
 #### Defined in
 
-[sniperBot.ts:15](https://github.com/paloma87/Uniswap-Sniper-V2/blob/dbb3c0e/src/sniperBot.ts#L15)
+[sniperBot.ts:13](https://github.com/paloma87/Uniswap-Sniper-V2/blob/1bdca46/src/sniperBot.ts#L13)
 
 ___
 
 ### logger
 
-• `Private` `Optional` **logger**: [`ILogger`](../interfaces/botLogger.ILogger.md)
+• `Private` `Optional` **logger**: [`ILogger`](../interfaces/BotLogger.ILogger.md)
 
 #### Defined in
 
-[sniperBot.ts:16](https://github.com/paloma87/Uniswap-Sniper-V2/blob/dbb3c0e/src/sniperBot.ts#L16)
+[sniperBot.ts:14](https://github.com/paloma87/Uniswap-Sniper-V2/blob/1bdca46/src/sniperBot.ts#L14)
 
 ## Methods
 
@@ -84,7 +84,7 @@ Calculete the gein in ether
 
 #### Defined in
 
-[sniperBot.ts:91](https://github.com/paloma87/Uniswap-Sniper-V2/blob/dbb3c0e/src/sniperBot.ts#L91)
+[sniperBot.ts:103](https://github.com/paloma87/Uniswap-Sniper-V2/blob/1bdca46/src/sniperBot.ts#L103)
 
 ___
 
@@ -96,11 +96,11 @@ ___
 
 | Name | Type |
 | :------ | :------ |
-| `logger` | `undefined` \| [`ILogger`](../interfaces/botLogger.ILogger.md) |
+| `logger` | `undefined` \| [`ILogger`](../interfaces/BotLogger.ILogger.md) |
 | `timeBeforeSell` | `number` |
 | `tokenAdressToSnipe` | `string` |
 | `amountIn` | `BigNumber` |
-| `provider` | [`TradeManager`](tradeManager.TradeManager.md) |
+| `provider` | [`TradeManager`](TradeManager.TradeManager-1.md) |
 
 #### Returns
 
@@ -108,7 +108,7 @@ ___
 
 #### Defined in
 
-[sniperBot.ts:52](https://github.com/paloma87/Uniswap-Sniper-V2/blob/dbb3c0e/src/sniperBot.ts#L52)
+[sniperBot.ts:59](https://github.com/paloma87/Uniswap-Sniper-V2/blob/1bdca46/src/sniperBot.ts#L59)
 
 ___
 
@@ -120,9 +120,9 @@ ___
 
 | Name | Type |
 | :------ | :------ |
-| `provider` | [`TradeManager`](tradeManager.TradeManager.md) |
+| `provider` | [`TradeManager`](TradeManager.TradeManager-1.md) |
 | `tokenAdressToSnipe` | `string` |
-| `logger` | `undefined` \| [`ILogger`](../interfaces/botLogger.ILogger.md) |
+| `logger` | `undefined` \| [`ILogger`](../interfaces/BotLogger.ILogger.md) |
 | `amountInETH` | `string` |
 
 #### Returns
@@ -131,7 +131,7 @@ ___
 
 #### Defined in
 
-[sniperBot.ts:71](https://github.com/paloma87/Uniswap-Sniper-V2/blob/dbb3c0e/src/sniperBot.ts#L71)
+[sniperBot.ts:83](https://github.com/paloma87/Uniswap-Sniper-V2/blob/1bdca46/src/sniperBot.ts#L83)
 
 ___
 
@@ -145,7 +145,7 @@ Snipe a Token
 
 | Name | Type |
 | :------ | :------ |
-| `tradeParams` | [`TradeParams`](tradeParams.TradeParams.md) |
+| `tradeParams` | [`TradeParams`](TradeParams.TradeParams-1.md) |
 
 #### Returns
 
@@ -155,4 +155,4 @@ Eth value gain in wei units
 
 #### Defined in
 
-[sniperBot.ts:28](https://github.com/paloma87/Uniswap-Sniper-V2/blob/dbb3c0e/src/sniperBot.ts#L28)
+[sniperBot.ts:25](https://github.com/paloma87/Uniswap-Sniper-V2/blob/1bdca46/src/sniperBot.ts#L25)

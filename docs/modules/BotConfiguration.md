@@ -1,9 +1,9 @@
-[uniswap-sniper-v2](../README.md) / [Modules](../modules.md) / botConfiguration
+[uniswap-sniper-v2](../README.md) / [Exports](../modules.md) / BotConfiguration
 
-# Module: botConfiguration
+# Module: BotConfiguration
 
 ## Table of contents
 
 ### Classes
 
-- [BotConfiguration](../classes/botConfiguration.BotConfiguration.md)
+- [BotConfiguration](../classes/BotConfiguration.BotConfiguration-1.md)

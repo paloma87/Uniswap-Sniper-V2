@@ -1,4 +1,6 @@
-uniswap-sniper-v2 / [Modules](modules.md)
+uniswap-sniper-v2 / [Exports](modules.md)
+
+uniswap-sniper-v2 / [Code Documentation](docs/modules.md)
 
 # Uniswap-Sniper-V2
 
@@ -52,6 +54,7 @@ Per avviare l'operazione costruire l'oggetto ```TradeParams```  impostare i dati
     trade.BuyCustomGasWei="70.00";
     trade.BuyGasLimit=150000;
     trade.BuySlippage = '15';
+    trade.EnableSell= false;
     trade.TimeToSellMs = 10000;// 10 sec
     trade.SellCustomGas =true;
     trade.SellCustomGasWei='70.00';

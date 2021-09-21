@@ -1,4 +1,4 @@
-[uniswap-sniper-v2](../README.md) / [Modules](../modules.md) / sniperBot
+[uniswap-sniper-v2](../README.md) / [Exports](../modules.md) / sniperBot
 
 # Module: sniperBot
 

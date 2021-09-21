@@ -1,8 +1,8 @@
-[uniswap-sniper-v2](../README.md) / [Modules](../modules.md) / [tradeManager](../modules/tradeManager.md) / TradeManager
+[uniswap-sniper-v2](../README.md) / [Exports](../modules.md) / [TradeManager](../modules/TradeManager.md) / TradeManager
 
 # Class: TradeManager
 
-[tradeManager](../modules/tradeManager.md).TradeManager
+[TradeManager](../modules/TradeManager.md).TradeManager
 
 Handle the trade operation
 
@@ -10,27 +10,27 @@ Handle the trade operation
 
 ### Constructors
 
-- [constructor](tradeManager.TradeManager.md#constructor)
+- [constructor](TradeManager.TradeManager-1.md#constructor)
 
 ### Properties
 
-- [botConfig](tradeManager.TradeManager.md#botconfig)
-- [logger](tradeManager.TradeManager.md#logger)
-- [provider](tradeManager.TradeManager.md#provider)
-- [tradeParams](tradeManager.TradeManager.md#tradeparams)
+- [botConfig](TradeManager.TradeManager-1.md#botconfig)
+- [logger](TradeManager.TradeManager-1.md#logger)
+- [provider](TradeManager.TradeManager-1.md#provider)
+- [tradeParams](TradeManager.TradeManager-1.md#tradeparams)
 
 ### Methods
 
-- [ApproveTokenUniswap](tradeManager.TradeManager.md#approvetokenuniswap)
-- [BalanceOf](tradeManager.TradeManager.md#balanceof)
-- [GetBuyGasPrice](tradeManager.TradeManager.md#getbuygasprice)
-- [GetSellGasPrice](tradeManager.TradeManager.md#getsellgasprice)
-- [GetSigner](tradeManager.TradeManager.md#getsigner)
-- [MakeMoney](tradeManager.TradeManager.md#makemoney)
-- [Snipe](tradeManager.TradeManager.md#snipe)
-- [SwapETHForToken](tradeManager.TradeManager.md#swapethfortoken)
-- [SwapExactTokensForETH](tradeManager.TradeManager.md#swapexacttokensforeth)
-- [WaitTransactionComplete](tradeManager.TradeManager.md#waittransactioncomplete)
+- [ApproveTokenUniswap](TradeManager.TradeManager-1.md#approvetokenuniswap)
+- [BalanceOf](TradeManager.TradeManager-1.md#balanceof)
+- [GetBuyGasPrice](TradeManager.TradeManager-1.md#getbuygasprice)
+- [GetSellGasPrice](TradeManager.TradeManager-1.md#getsellgasprice)
+- [GetSigner](TradeManager.TradeManager-1.md#getsigner)
+- [MakeMoney](TradeManager.TradeManager-1.md#makemoney)
+- [Snipe](TradeManager.TradeManager-1.md#snipe)
+- [SwapETHForToken](TradeManager.TradeManager-1.md#swapethfortoken)
+- [SwapExactTokensForETH](TradeManager.TradeManager-1.md#swapexacttokensforeth)
+- [WaitTransactionComplete](TradeManager.TradeManager-1.md#waittransactioncomplete)
 
 ## Constructors
 
@@ -42,33 +42,33 @@ Handle the trade operation
 
 | Name | Type |
 | :------ | :------ |
-| `tradeParams` | [`TradeParams`](tradeParams.TradeParams.md) |
-| `botConfig` | [`BotConfiguration`](botConfiguration.BotConfiguration.md) |
-| `logger?` | [`ILogger`](../interfaces/botLogger.ILogger.md) |
+| `tradeParams` | [`TradeParams`](TradeParams.TradeParams-1.md) |
+| `botConfig` | [`BotConfiguration`](BotConfiguration.BotConfiguration-1.md) |
+| `logger?` | [`ILogger`](../interfaces/BotLogger.ILogger.md) |
 
 #### Defined in
 
-tradeManager.ts:29
+[TradeManager.ts:28](https://github.com/paloma87/Uniswap-Sniper-V2/blob/1bdca46/src/TradeManager.ts#L28)
 
 ## Properties
 
 ### botConfig
 
-• `Private` **botConfig**: [`BotConfiguration`](botConfiguration.BotConfiguration.md)
+• `Private` **botConfig**: [`BotConfiguration`](BotConfiguration.BotConfiguration-1.md)
 
 #### Defined in
 
-tradeManager.ts:28
+[TradeManager.ts:27](https://github.com/paloma87/Uniswap-Sniper-V2/blob/1bdca46/src/TradeManager.ts#L27)
 
 ___
 
 ### logger
 
-• `Private` `Optional` **logger**: [`ILogger`](../interfaces/botLogger.ILogger.md)
+• `Private` `Optional` **logger**: [`ILogger`](../interfaces/BotLogger.ILogger.md)
 
 #### Defined in
 
-tradeManager.ts:26
+[TradeManager.ts:25](https://github.com/paloma87/Uniswap-Sniper-V2/blob/1bdca46/src/TradeManager.ts#L25)
 
 ___
 
@@ -78,17 +78,17 @@ ___
 
 #### Defined in
 
-tradeManager.ts:25
+[TradeManager.ts:24](https://github.com/paloma87/Uniswap-Sniper-V2/blob/1bdca46/src/TradeManager.ts#L24)
 
 ___
 
 ### tradeParams
 
-• `Private` **tradeParams**: [`TradeParams`](tradeParams.TradeParams.md)
+• `Private` **tradeParams**: [`TradeParams`](TradeParams.TradeParams-1.md)
 
 #### Defined in
 
-tradeManager.ts:27
+[TradeManager.ts:26](https://github.com/paloma87/Uniswap-Sniper-V2/blob/1bdca46/src/TradeManager.ts#L26)
 
 ## Methods
 
@@ -111,7 +111,7 @@ This operation is preparatory to the sale of the sniped token
 
 #### Defined in
 
-tradeManager.ts:42
+[TradeManager.ts:41](https://github.com/paloma87/Uniswap-Sniper-V2/blob/1bdca46/src/TradeManager.ts#L41)
 
 ___
 
@@ -133,7 +133,7 @@ Retrive the current balance of token into wallet configured
 
 #### Defined in
 
-tradeManager.ts:129
+[TradeManager.ts:126](https://github.com/paloma87/Uniswap-Sniper-V2/blob/1bdca46/src/TradeManager.ts#L126)
 
 ___
 
@@ -151,7 +151,7 @@ Gas price in wei
 
 #### Defined in
 
-tradeManager.ts:139
+[TradeManager.ts:136](https://github.com/paloma87/Uniswap-Sniper-V2/blob/1bdca46/src/TradeManager.ts#L136)
 
 ___
 
@@ -169,7 +169,7 @@ Gas price in wei
 
 #### Defined in
 
-tradeManager.ts:148
+[TradeManager.ts:145](https://github.com/paloma87/Uniswap-Sniper-V2/blob/1bdca46/src/TradeManager.ts#L145)
 
 ___
 
@@ -187,7 +187,7 @@ Signer connected to provider
 
 #### Defined in
 
-tradeManager.ts:156
+[TradeManager.ts:154](https://github.com/paloma87/Uniswap-Sniper-V2/blob/1bdca46/src/TradeManager.ts#L154)
 
 ___
 
@@ -211,7 +211,7 @@ for the trade of sale sniped token and call operation
 
 #### Defined in
 
-tradeManager.ts:54
+[TradeManager.ts:53](https://github.com/paloma87/Uniswap-Sniper-V2/blob/1bdca46/src/TradeManager.ts#L53)
 
 ___
 
@@ -232,7 +232,7 @@ ___
 
 #### Defined in
 
-tradeManager.ts:91
+[TradeManager.ts:89](https://github.com/paloma87/Uniswap-Sniper-V2/blob/1bdca46/src/TradeManager.ts#L89)
 
 ___
 
@@ -256,7 +256,7 @@ Execute the snipe operation
 
 #### Defined in
 
-tradeManager.ts:168
+[TradeManager.ts:166](https://github.com/paloma87/Uniswap-Sniper-V2/blob/1bdca46/src/TradeManager.ts#L166)
 
 ___
 
@@ -280,7 +280,7 @@ Execute the sell trade
 
 #### Defined in
 
-tradeManager.ts:206
+[TradeManager.ts:204](https://github.com/paloma87/Uniswap-Sniper-V2/blob/1bdca46/src/TradeManager.ts#L204)
 
 ___
 
@@ -302,4 +302,4 @@ Wait transaction and check if status ok else throw an exception
 
 #### Defined in
 
-tradeManager.ts:243
+[TradeManager.ts:241](https://github.com/paloma87/Uniswap-Sniper-V2/blob/1bdca46/src/TradeManager.ts#L241)

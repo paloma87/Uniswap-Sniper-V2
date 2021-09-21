@@ -1,20 +1,20 @@
-[uniswap-sniper-v2](../README.md) / [Modules](../modules.md) / [botLogger](../modules/botLogger.md) / ILogger
+[uniswap-sniper-v2](../README.md) / [Exports](../modules.md) / [BotLogger](../modules/BotLogger.md) / ILogger
 
 # Interface: ILogger
 
-[botLogger](../modules/botLogger.md).ILogger
+[BotLogger](../modules/BotLogger.md).ILogger
 
 ## Implemented by
 
-- [`ConsoleLogger`](../classes/botLogger.ConsoleLogger.md)
+- [`ConsoleLogger`](../classes/BotLogger.ConsoleLogger.md)
 
 ## Table of contents
 
 ### Methods
 
-- [LogDebug](botLogger.ILogger.md#logdebug)
-- [LogError](botLogger.ILogger.md#logerror)
-- [LogInfo](botLogger.ILogger.md#loginfo)
+- [LogDebug](BotLogger.ILogger.md#logdebug)
+- [LogError](BotLogger.ILogger.md#logerror)
+- [LogInfo](BotLogger.ILogger.md#loginfo)
 
 ## Methods
 
@@ -34,7 +34,7 @@
 
 #### Defined in
 
-botLogger.ts:4
+[BotLogger.ts:4](https://github.com/paloma87/Uniswap-Sniper-V2/blob/1bdca46/src/BotLogger.ts#L4)
 
 ___
 
@@ -54,7 +54,7 @@ ___
 
 #### Defined in
 
-botLogger.ts:6
+[BotLogger.ts:6](https://github.com/paloma87/Uniswap-Sniper-V2/blob/1bdca46/src/BotLogger.ts#L6)
 
 ___
 
@@ -74,4 +74,4 @@ ___
 
 #### Defined in
 
-botLogger.ts:2
+[BotLogger.ts:2](https://github.com/paloma87/Uniswap-Sniper-V2/blob/1bdca46/src/BotLogger.ts#L2)
